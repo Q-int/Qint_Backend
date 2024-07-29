@@ -44,7 +44,15 @@ erDiagram
         DateTime created_at
     }
 
+    refresh_token {
+        int token_id PK
+        string token
+        date expiry_date
+        int user_id FK
+    }
+
     user ||--o{ user_incorrect_answers : has
+    user ||--o{ refresh_token : has
     category ||--o{ question : contains
     question ||--|{ answer : has
     question ||--o{ user_incorrect_answers : is_incorrect
