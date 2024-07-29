@@ -36,6 +36,14 @@ erDiagram
         Long questionID FK
     }
 
+    email_verification {
+        Long id PK
+        String auth_code
+        String email
+        Boolean is_verified
+        DateTime created_at
+    }
+
     user ||--o{ user_incorrect_answers : has
     category ||--o{ question : contains
     question ||--|{ answer : has
