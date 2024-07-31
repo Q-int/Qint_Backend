@@ -6,8 +6,8 @@ erDiagram
         Long id PK
         String email UK
         String password
-        Long correctAnswers
-        Long incorrectAnswers
+        Long correct_answers
+        Long incorrect_answers
     }
 
     category {
@@ -19,22 +19,22 @@ erDiagram
         Long id PK
         String contents
         String commentary
-        Long questionID FK
-        Long categoryID FK
+        Long question_id FK
+        Long category_id FK
     }
     
     answer {
         Long id PK
         String text
-        boolean isCorrect
-        Long questionID FK
+        boolean is_correct
+        Long question_id FK
     }
 
     user_incorrect_answers {
         Long id PK
-        Long userID FK
-        Long questionID FK
-        Long answerId FK "유저가 선택한 오답"
+        Long user_id FK
+        Long question_id FK
+        Long answer_id FK "유저가 선택한 오답"
     }
 
     email_verification {
