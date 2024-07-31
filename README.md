@@ -34,6 +34,7 @@ erDiagram
         Long id PK
         Long userID FK
         Long questionID FK
+        Long answerId FK "유저가 선택한 오답"
     }
 
     email_verification {
@@ -56,4 +57,5 @@ erDiagram
     category ||--o{ question : contains
     question ||--|{ answer : has
     question ||--o{ user_incorrect_answers : is_incorrect
+    user_incorrect_answers |o--o| answer : has
 ```
