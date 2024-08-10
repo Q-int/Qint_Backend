@@ -18,7 +18,9 @@ public class UserIncorrectAnswers {
     @Column(name = "id")
     private Long id;
 
-    //userId
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "user_id")
+//    private User user;
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="question_id")

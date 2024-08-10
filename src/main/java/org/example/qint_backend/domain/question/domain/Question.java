@@ -26,6 +26,6 @@ public class Question {
 
     @Column(name="category", nullable = false)
     @Enumerated(EnumType.STRING)
-    private Category category;
+    private Category categoryId;
 
 }
