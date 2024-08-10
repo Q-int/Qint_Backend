@@ -24,4 +24,8 @@ public class Question {
     @Column(name="comentary", nullable = false)
     private String commentary;
 
+    @Column(name="category", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Category category;
+
 }
