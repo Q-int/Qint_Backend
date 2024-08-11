@@ -68,7 +68,7 @@ public class JwtTokenProvider {
         return null;
     }
 
-    public Authentication authentication(String token) {
+    public Authentication getAuthenticationFromToken(String token) {
         Claims body = getJws(token).getBody();
         if (!isNotRefreshToken(token)) throw InvalidTokenException.EXCEPTION;
 
