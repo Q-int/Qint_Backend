@@ -28,6 +28,9 @@ public class JwtTokenProvider {
     private static final String ACCESS_KEY = "access_token";
     private static final String REFRESH_KEY = "refresh_token";
 
+    private static final String TOKEN_TYPE = "typ";
+    private static final String TOKEN_ROLE = "role";
+
     public TokenResponse generateToken(User user, String role) {
         String accessToken = generateToken(user.getEmail(), role, ACCESS_KEY, jwtProperties.getAccessExpiration());
         String refreshToken = generateToken(user.getEmail(), role, REFRESH_KEY, jwtProperties.getRefreshExpiration());
@@ -45,8 +48,8 @@ public class JwtTokenProvider {
     private String generateToken(String email, String role, String type, Long exp) {
         return Jwts.builder()
                 .setSubject(email)
-                .setHeaderParam("typ", type)
-                .claim("role", role)
+                .setHeaderParam(TOKEN_TYPE, type)
+                .claim(TOKEN_ROLE, role)
                 .signWith(SignatureAlgorithm.HS256, jwtProperties.getSecret())
                 .setExpiration(new Date(System.currentTimeMillis() + exp * 1000))
                 .setIssuedAt(new Date())
