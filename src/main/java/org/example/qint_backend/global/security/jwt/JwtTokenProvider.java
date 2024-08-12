@@ -1,8 +1,8 @@
 package org.example.qint_backend.global.security.jwt;
 
+import io.jsonwebtoken.*;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-
 import org.example.qint_backend.domain.auth.domain.RefreshToken;
 import org.example.qint_backend.domain.auth.domain.repository.RefreshTokenRepository;
 import org.example.qint_backend.domain.auth.exception.ExpiredTokenException;
@@ -14,12 +14,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 
 import java.util.Date;
 
@@ -61,11 +55,18 @@ public class JwtTokenProvider {
 
     public String resolveToken(HttpServletRequest request) {
         String bearer = request.getHeader(jwtProperties.getHeader());
-        if (bearer != null
-                && bearer.startsWith(jwtProperties.getPrefix())
-                && bearer.length() > jwtProperties.getPrefix().length() + 1)
+
+        if (isBearerToken(bearer)) {
             return bearer.substring(jwtProperties.getPrefix().length() + 1);
+        }
+
         return null;
+    }
+
+    public boolean isBearerToken(String token) {
+        return (token != null)
+                && (token.startsWith(jwtProperties.getPrefix()))
+                && (token.length() > jwtProperties.getPrefix().length() + 1);
     }
 
     public Authentication getAuthenticationFromToken(String token) {
