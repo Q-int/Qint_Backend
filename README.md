@@ -46,7 +46,7 @@ erDiagram
     }
 
     refresh_token {
-        int token_id PK
+        Long id PK
         String token
         date expiry_date
         String email UK
