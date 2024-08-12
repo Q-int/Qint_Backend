@@ -47,7 +47,7 @@ erDiagram
 
     refresh_token {
         int token_id PK
-        string token
+        String token
         String email
         date expiry_date
     }
