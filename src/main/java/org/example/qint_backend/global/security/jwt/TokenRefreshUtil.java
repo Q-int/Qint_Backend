@@ -2,6 +2,7 @@ package org.example.qint_backend.global.security.jwt;
 
 import lombok.RequiredArgsConstructor;
 
+import org.example.qint_backend.domain.auth.domain.RefreshToken;
 import org.example.qint_backend.domain.auth.domain.repository.RefreshTokenRepository;
 import org.example.qint_backend.domain.auth.exception.InvalidTokenException;
 import org.example.qint_backend.domain.auth.presentation.dto.response.TokenResponse;
@@ -21,21 +22,16 @@ public class TokenRefreshUtil {
 
     private final JwtProperties jwtProperties;
 
-    public TokenResponse tokenRefresh(String refreshToken) {
-        if (jwtTokenProvider.isNotRefreshToken(refreshToken)) {
+    public TokenResponse tokenRefresh(String token) {
+        if (jwtTokenProvider.isNotRefreshToken(token)) {
             throw InvalidTokenException.EXCEPTION;
         }
 
-        return refreshTokenRepository
-                .findByToken(refreshToken)
-                .map(token -> {
-                    User user = token.getUser();
-                    String role = jwtTokenProvider.getRole(token.getToken());
+        RefreshToken refreshToken = refreshTokenRepository.findByToken(token).orElseThrow(() -> InvalidTokenException.EXCEPTION);
 
-                    TokenResponse tokenResponse = jwtTokenProvider.generateToken(user, role);
-                    token.update(tokenResponse.getRefreshToken(), new Date(jwtProperties.getRefreshExpiration()));
-                    return new TokenResponse(tokenResponse.getAccessToken(), tokenResponse.getRefreshToken());
-                })
-                .orElseThrow(() -> InvalidTokenException.EXCEPTION);
+        User user = refreshToken.getUser();
+        String role = jwtTokenProvider.getRole(refreshToken.getToken());
+
+        return jwtTokenProvider.generateToken(user, role);
     }
 }
