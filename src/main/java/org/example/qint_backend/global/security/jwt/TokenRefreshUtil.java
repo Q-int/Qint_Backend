@@ -19,7 +19,7 @@ public class TokenRefreshUtil {
 
     private final JwtTokenProvider jwtTokenProvider;
 
-    @Value("${auth.jwt.refreshExpiration}") private long refreshExpiration;
+    private final JwtProperties jwtProperties;
 
     public TokenResponse tokenRefresh(String refreshToken) {
         if (jwtTokenProvider.isNotRefreshToken(refreshToken)) {
@@ -33,7 +33,7 @@ public class TokenRefreshUtil {
                     String role = jwtTokenProvider.getRole(token.getToken());
 
                     TokenResponse tokenResponse = jwtTokenProvider.generateToken(user, role);
-                    token.update(tokenResponse.getRefreshToken(), new Date(refreshExpiration));
+                    token.update(tokenResponse.getRefreshToken(), new Date(jwtProperties.getRefreshExpiration()));
                     return new TokenResponse(tokenResponse.getAccessToken(), tokenResponse.getRefreshToken());
                 })
                 .orElseThrow(() -> InvalidTokenException.EXCEPTION);
