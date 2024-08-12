@@ -1,32 +1,29 @@
 package org.example.qint_backend.domain.question.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
 @Table(name = "tbl_user_incorrect_answers")
 public class UserIncorrectAnswers {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", updatable = false)
     private Long id;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "user_id")
-//    private User user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", updatable = false)
+    private User user;
 
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="question_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "question_id", updatable = false)
     private Question question;
 
     @OneToOne
-    @JoinColumn(name = "answer_id")
+    @JoinColumn(name = "answer_id", updatable = false)
     private Answer answer;
 }
