@@ -49,7 +49,7 @@ erDiagram
         int token_id PK
         String token
         date expiry_date
-        int user_id FK
+        String email UK
     }
 
     user ||--o{ user_incorrect_answers : has
