@@ -81,11 +81,11 @@ public class JwtTokenProvider {
     }
 
     public boolean isNotRefreshToken(String token) {
-        return !REFRESH_KEY.equals(getJws(token).getHeader().get("typ").toString());
+        return !REFRESH_KEY.equals(getJws(token).getHeader().get(TOKEN_TYPE).toString());
     }
 
     public String getRole(String token) {
-        return getJws(token).getBody().get("role").toString();
+        return getJws(token).getBody().get(TOKEN_ROLE).toString();
     }
 
     private Jws<Claims> getJws(String token) {
