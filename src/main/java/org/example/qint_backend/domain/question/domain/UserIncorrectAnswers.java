@@ -16,14 +16,14 @@ public class UserIncorrectAnswers {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", updatable = false)
+    @JoinColumn(name = "user_id", nullable = false, updatable = false)
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "question_id", updatable = false)
+    @JoinColumn(name = "question_id", nullable = false, updatable = false)
     private Question question;
 
     @OneToOne
-    @JoinColumn(name = "answer_id", updatable = false)
+    @JoinColumn(name = "answer_id", nullable = false, updatable = false)
     private Answer answer;
 }
