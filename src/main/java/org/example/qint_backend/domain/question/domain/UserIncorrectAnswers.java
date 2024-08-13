@@ -23,7 +23,7 @@ public class UserIncorrectAnswers {
     @JoinColumn(name = "question_id", nullable = false, updatable = false)
     private Question question;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "answer_id", nullable = false, updatable = false)
     private Answer answer;
 }
