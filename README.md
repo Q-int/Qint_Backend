@@ -56,5 +56,5 @@ erDiagram
     category ||--o{ question : contains
     question ||--|{ answer : has
     question ||--o{ user_incorrect_answers : is_incorrect
-    user_incorrect_answers |o--o| answer : has
+    user_incorrect_answers }o--o| answer : has
 ```
