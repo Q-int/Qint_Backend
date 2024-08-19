@@ -37,7 +37,7 @@ public class JwtTokenProvider {
 
         refreshTokenRepository.save(RefreshToken.builder()
                 .token(refreshToken)
-                .expiryDate(new java.sql.Date(jwtProperties.getRefreshExpiration() * 1000))
+                .ttl(jwtProperties.getRefreshExpiration() * 1000)
                 .user(user)
                 .build()
         );

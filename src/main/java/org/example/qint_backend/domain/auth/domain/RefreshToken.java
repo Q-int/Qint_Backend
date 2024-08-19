@@ -5,12 +5,12 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.example.qint_backend.domain.user.domain.User;
-
-import java.sql.Date;
+import org.springframework.data.redis.core.RedisHash;
+import org.springframework.data.redis.core.TimeToLive;
 
 @Getter
 @NoArgsConstructor
-@Entity(name = "refresh_token")
+@RedisHash
 public class RefreshToken {
 
     @Id
@@ -20,22 +20,22 @@ public class RefreshToken {
     @Column(name = "token")
     private String token;
 
-    @Column(name = "expiry_date")
-    private Date expiryDate;
+    @TimeToLive
+    private Long ttl;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @Builder
-    public RefreshToken(String token, Date expiryDate, User user) {
+    public RefreshToken(String token, Long ttl, User user) {
         this.token = token;
-        this.expiryDate = expiryDate;
+        this.ttl = ttl;
         this.user = user;
     }
 
-    public void update(String refreshToken, Date expiryDate) {
+    public void update(String refreshToken, Long ttl) {
         this.token = refreshToken;
-        this.expiryDate = expiryDate;
+        this.ttl = ttl;
     }
 }

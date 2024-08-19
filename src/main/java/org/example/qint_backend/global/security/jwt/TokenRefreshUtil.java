@@ -7,10 +7,7 @@ import org.example.qint_backend.domain.auth.domain.repository.RefreshTokenReposi
 import org.example.qint_backend.domain.auth.exception.InvalidTokenException;
 import org.example.qint_backend.domain.auth.presentation.dto.response.TokenResponse;
 import org.example.qint_backend.domain.user.domain.User;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
-import java.sql.Date;
 
 @RequiredArgsConstructor
 @Component
