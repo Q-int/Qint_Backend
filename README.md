@@ -19,7 +19,6 @@ erDiagram
         Long id PK
         String contents
         String commentary
-        Long question_id FK
         Long category_id FK
     }
     
