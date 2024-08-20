@@ -11,6 +11,8 @@ public enum ErrorCode {
 
     USER_NOT_FOUND(404, "user not found"),
 
+    EMAIL_VERIFICATION_NOT_FOUND(404, "email_verification not found"),
+
     BAD_REQUEST(400, "bad request"),
 
     INTERNAL_SERVER_ERROR(500, "server error"),
