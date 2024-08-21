@@ -1,7 +1,13 @@
 package org.example.qint_backend.domain.email.exception;
 
-public class EmailNotVerifiedException extends RuntimeException {
-    public EmailNotVerifiedException(String message) {
-        super(message);
+import org.example.qint_backend.global.err.exception.ErrorCode;
+import org.example.qint_backend.global.err.exception.QintException;
+
+public class EmailNotVerifiedException extends QintException {
+
+    public static QintException EXCEPTION = new EmailNotVerifiedException();
+
+    private EmailNotVerifiedException() {
+        super(ErrorCode.USER_NOT_FOUND);
     }
 }
