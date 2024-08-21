@@ -15,6 +15,8 @@ public enum ErrorCode {
 
     BAD_REQUEST(400, "bad request"),
 
+    EMAIL_NOT_VERIFIED(412, "email not verified"),
+
     INTERNAL_SERVER_ERROR(500, "server error"),
 
     INVALID_TOKEN_EXCEPTION(401, "invalid token exception"),
