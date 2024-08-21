@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.example.qint_backend.domain.user.domain.User;
 import org.springframework.data.redis.core.RedisHash;
 import org.springframework.data.redis.core.TimeToLive;
 
@@ -23,15 +22,13 @@ public class RefreshToken {
     @TimeToLive
     private Long ttl;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private String email;
 
     @Builder
-    public RefreshToken(String token, Long ttl, User user) {
+    public RefreshToken(String token, Long ttl, String email) {
         this.token = token;
         this.ttl = ttl;
-        this.user = user;
+        this.email = email;
     }
 
     public void update(String refreshToken, Long ttl) {
