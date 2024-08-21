@@ -26,9 +26,9 @@ public class TokenRefreshUtil {
 
         RefreshToken refreshToken = refreshTokenRepository.findByToken(token).orElseThrow(() -> InvalidTokenException.EXCEPTION);
 
-        User user = refreshToken.getUser();
+        String email = refreshToken.getEmail();
         String role = jwtTokenProvider.getRole(refreshToken.getToken());
 
-        return jwtTokenProvider.generateToken(user, role);
+        return jwtTokenProvider.generateToken(email, role);
     }
 }

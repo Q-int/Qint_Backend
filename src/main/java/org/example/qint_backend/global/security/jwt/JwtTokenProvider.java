@@ -8,7 +8,6 @@ import org.example.qint_backend.domain.auth.domain.repository.RefreshTokenReposi
 import org.example.qint_backend.domain.auth.exception.ExpiredTokenException;
 import org.example.qint_backend.domain.auth.exception.InvalidTokenException;
 import org.example.qint_backend.domain.auth.presentation.dto.response.TokenResponse;
-import org.example.qint_backend.domain.user.domain.User;
 import org.example.qint_backend.global.security.auth.AuthDetailsService;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -31,14 +30,14 @@ public class JwtTokenProvider {
     private static final String TOKEN_TYPE = "typ";
     private static final String TOKEN_ROLE = "role";
 
-    public TokenResponse generateToken(User user, String role) {
-        String accessToken = generateToken(user.getEmail(), role, ACCESS_KEY, jwtProperties.getAccessExpiration());
-        String refreshToken = generateToken(user.getEmail(), role, REFRESH_KEY, jwtProperties.getRefreshExpiration());
+    public TokenResponse generateToken(String email, String role) {
+        String accessToken = generateToken(email, role, ACCESS_KEY, jwtProperties.getAccessExpiration());
+        String refreshToken = generateToken(email, role, REFRESH_KEY, jwtProperties.getRefreshExpiration());
 
         refreshTokenRepository.save(RefreshToken.builder()
                 .token(refreshToken)
                 .ttl(jwtProperties.getRefreshExpiration() * 1000)
-                .user(user)
+                .email(email)
                 .build()
         );
 
