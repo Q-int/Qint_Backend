@@ -21,7 +21,9 @@ import java.util.Date;
 public class JwtTokenProvider {
 
     private final JwtProperties jwtProperties;
+
     private final AuthDetailsService authDetailsService;
+
     private final RefreshTokenRepository refreshTokenRepository;
 
     private static final String ACCESS_KEY = "access_token";
