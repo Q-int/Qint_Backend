@@ -6,7 +6,6 @@ import org.example.qint_backend.domain.auth.domain.RefreshToken;
 import org.example.qint_backend.domain.auth.domain.repository.RefreshTokenRepository;
 import org.example.qint_backend.domain.auth.exception.InvalidTokenException;
 import org.example.qint_backend.domain.auth.presentation.dto.response.TokenResponse;
-import org.example.qint_backend.domain.user.domain.User;
 import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
