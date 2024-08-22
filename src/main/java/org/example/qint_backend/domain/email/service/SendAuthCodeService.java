@@ -15,7 +15,9 @@ import java.util.Random;
 public class SendAuthCodeService {
 
     private final EmailService emailService;
+
     private final EmailVerificationRepository emailVerificationRepository;
+
     private final EmailVerificationFacade emailVerificationFacade;
 
     @Transactional
