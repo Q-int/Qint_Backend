@@ -22,6 +22,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 public class SecurityConfig {
 
     private final JwtTokenProvider jwtTokenProvider;
+
     private final ObjectMapper objectMapper;
 
     @Bean
