@@ -2,6 +2,7 @@ package org.example.qint_backend.domain.question.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.qint_backend.domain.user.domain.User;
 
 @Entity
 @Getter
