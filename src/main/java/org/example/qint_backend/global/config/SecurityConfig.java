@@ -40,6 +40,9 @@ public class SecurityConfig {
                         .requestMatchers("/auth/**")
                         .permitAll()
 
+                        .requestMatchers("/email/**")
+                        .permitAll()
+
                         .anyRequest()
                         .authenticated())
 
