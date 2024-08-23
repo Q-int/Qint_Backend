@@ -31,7 +31,7 @@ public class AuthController {
         return loginService.execute(loginRequest);
     }
 
-    @PutMapping("/auth")
+    @PutMapping("/refresh")
     public TokenResponse tokenRefresh(@RequestHeader("X-Refresh-Token") String refreshToken) {
         return tokenRefreshService.execute(refreshToken);
     }
