@@ -36,7 +36,7 @@ public class EmailController {
         return checkAuthCodeService.execute(checkAuthCodeRequest);
     }
 
-    @PostMapping("/email/email-verify")
+    @PostMapping("/email-verify")
     public EmailVerifyResponse EmailVerify(@RequestBody @Valid EmailVerifyRequest emailVerifyRequest) {
         return emailVerifyService.execute(emailVerifyRequest);
     }
