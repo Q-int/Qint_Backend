@@ -14,8 +14,8 @@ public class SignupRequest {
 
     @NotBlank(message = "password는 Null 또는 공백 또는 띄어쓰기를 허용하지 않습니다.")
     @Pattern(
-            regexp =
-                    "^(?=.*[!@#$%^&*])(?=.{1,20}$).*",
-            message = "password는 소문자, 숫자, 특수문자가 포함되어야 합니다.")
+            regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,64}$",
+            message = "영어, 숫자, 특수기호를 모두 한 개 이상 포함한 8~64 문자 사이의 비밀번호"
+    )
     private String password;
 }
