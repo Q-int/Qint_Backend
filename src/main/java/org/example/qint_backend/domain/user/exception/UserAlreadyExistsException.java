@@ -8,6 +8,6 @@ public class UserAlreadyExistsException extends QintException {
     public static final QintException EXCEPTION = new UserAlreadyExistsException();
 
     private UserAlreadyExistsException() {
-        super(ErrorCode.USER_NOT_FOUND);
+        super(ErrorCode.USER_ALREADY_EXISTS);
     }
 }
