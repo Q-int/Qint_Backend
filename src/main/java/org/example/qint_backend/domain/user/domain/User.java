@@ -27,7 +27,7 @@ public class User {
     private Long incorrectAnswers;
 
     @Builder
-    public User(Long id, String email, String password, Long correctAnswers, Long incorrectAnswer) {
+    public User(String email, String password, Long correctAnswers, Long incorrectAnswer) {
         this.email = email;
         this.password = password;
         this.correctAnswers = correctAnswers;
