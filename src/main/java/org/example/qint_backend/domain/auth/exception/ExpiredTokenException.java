@@ -8,6 +8,6 @@ public class ExpiredTokenException extends QintException {
     public static final QintException EXCEPTION = new ExpiredTokenException();
 
     private ExpiredTokenException() {
-        super(ErrorCode.INVALID_TOKEN_EXCEPTION);
+        super(ErrorCode.EXPIRED_TOKEN_EXCEPTION);
     }
 }
