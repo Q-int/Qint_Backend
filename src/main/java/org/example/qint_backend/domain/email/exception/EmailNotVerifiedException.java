@@ -8,6 +8,6 @@ public class EmailNotVerifiedException extends QintException {
     public static QintException EXCEPTION = new EmailNotVerifiedException();
 
     private EmailNotVerifiedException() {
-        super(ErrorCode.USER_NOT_FOUND);
+        super(ErrorCode.EMAIL_NOT_VERIFIED);
     }
 }
