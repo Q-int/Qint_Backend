@@ -29,6 +29,4 @@ public class LoginService {
 
         return jwtTokenProvider.generateToken(user.getEmail(), "USER");
     }
-
-
 }
