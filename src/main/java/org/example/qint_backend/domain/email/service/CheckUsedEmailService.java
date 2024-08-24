@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class EmailVerifyService {
+public class CheckUsedEmailService {
 
     private final UserRepository userRepository;
 

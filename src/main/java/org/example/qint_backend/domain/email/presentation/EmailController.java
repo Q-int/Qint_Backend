@@ -8,7 +8,7 @@ import org.example.qint_backend.domain.email.presentation.dto.request.SendAuthCo
 import org.example.qint_backend.domain.email.presentation.dto.response.CheckAuthCodeResponse;
 import org.example.qint_backend.domain.email.presentation.dto.response.EmailVerifyResponse;
 import org.example.qint_backend.domain.email.service.CheckAuthCodeService;
-import org.example.qint_backend.domain.email.service.EmailVerifyService;
+import org.example.qint_backend.domain.email.service.CheckUsedEmailService;
 import org.example.qint_backend.domain.email.service.SendAuthCodeService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,7 +24,7 @@ public class EmailController {
 
     private final CheckAuthCodeService checkAuthCodeService;
 
-    private final EmailVerifyService emailVerifyService;
+    private final CheckUsedEmailService checkUsedEmailService;
 
     @PostMapping("/send-authcode")
     public void sendAuthCode(@RequestBody @Valid SendAuthCodeRequest sendAuthCodeRequest) {
@@ -38,6 +38,6 @@ public class EmailController {
 
     @PostMapping("/email-verify")
     public EmailVerifyResponse EmailVerify(@RequestBody @Valid EmailVerifyRequest emailVerifyRequest) {
-        return emailVerifyService.execute(emailVerifyRequest);
+        return checkUsedEmailService.execute(emailVerifyRequest);
     }
 }
