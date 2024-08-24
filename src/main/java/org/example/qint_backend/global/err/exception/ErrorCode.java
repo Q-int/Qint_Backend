@@ -17,7 +17,7 @@ public enum ErrorCode {
 
     BAD_REQUEST(400, "bad request"),
 
-    EMAIL_NOT_VERIFIED(412, "email not verified"),
+    EMAIL_NOT_VERIFIED(400, "email not verified"),
 
     PASSWORD_NOT_VALID(401, "password not valid"),
 
