@@ -13,8 +13,6 @@ public enum ErrorCode {
 
     USER_ALREADY_EXISTS(409, "user already exists"),
 
-    EMAIL_VERIFICATION_NOT_FOUND(401, "email doesn't verified"),
-
     BAD_REQUEST(400, "bad request"),
 
     EMAIL_NOT_VERIFIED(400, "email not verified"),
