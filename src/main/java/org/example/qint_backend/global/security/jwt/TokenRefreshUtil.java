@@ -16,8 +16,6 @@ public class TokenRefreshUtil {
 
     private final JwtTokenProvider jwtTokenProvider;
 
-    private final JwtProperties jwtProperties;
-
     public TokenResponse tokenRefresh(String token) {
         if (jwtTokenProvider.isNotRefreshToken(token)) {
             throw InvalidTokenException.EXCEPTION;
