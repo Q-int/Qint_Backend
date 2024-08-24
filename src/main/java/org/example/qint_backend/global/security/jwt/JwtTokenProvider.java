@@ -9,6 +9,7 @@ import org.example.qint_backend.domain.auth.exception.ExpiredTokenException;
 import org.example.qint_backend.domain.auth.exception.InvalidTokenException;
 import org.example.qint_backend.domain.auth.presentation.dto.response.TokenResponse;
 import org.example.qint_backend.global.security.auth.AuthDetailsService;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -58,7 +59,7 @@ public class JwtTokenProvider {
     }
 
     public String resolveToken(HttpServletRequest request) {
-        String bearer = request.getHeader(jwtProperties.getHeader());
+        String bearer = request.getHeader(HttpHeaders.AUTHORIZATION);
 
         if (isBearerToken(bearer)) {
             return bearer.substring(jwtProperties.getPrefix().length() + 1);
