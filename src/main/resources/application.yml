@@ -1,0 +1,38 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${DB_URL:localhost}:3306/${DB_NAME}?useSSL=false&characterEncoding=UTF-8&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true&tinyInt1isBit=false&rewriteBatchedStatements=true
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties.hibernate:
+      format_sql: true
+      show_sql: true
+      jdbc:
+        batch_size: 200
+      open-in-view: false
+  redis:
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}
+    password: ${REDIS_PASSWORD:}
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        debug: true
+        smtp:
+          auth: true
+          timeout: 5000
+          starttls:
+            enable: true
+jwt:
+  prefix: ${JWT_PREFIX:Bearer}
+  header: ${JWT_HEADER:Authorization}
+  secret: ${JWT_SECRET}
+  accessExpiration: ${JWT_ACCESS_EXP:3600}
+  refreshExpiration: ${JWT_REFRESH_EXP:3600}
