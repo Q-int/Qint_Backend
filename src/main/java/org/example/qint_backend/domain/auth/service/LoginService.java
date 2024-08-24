@@ -1,6 +1,7 @@
 package org.example.qint_backend.domain.auth.service;
 
 import lombok.RequiredArgsConstructor;
+import org.example.qint_backend.domain.auth.domain.type.Role;
 import org.example.qint_backend.domain.auth.exception.PasswordNotValidException;
 import org.example.qint_backend.domain.auth.presentation.dto.request.LoginRequest;
 import org.example.qint_backend.domain.auth.presentation.dto.response.TokenResponse;
@@ -27,6 +28,6 @@ public class LoginService {
             throw PasswordNotValidException.EXCEPTION;
         }
 
-        return jwtTokenProvider.generateToken(user.getEmail(), "USER");
+        return jwtTokenProvider.generateToken(user.getEmail(), Role.USER.toString());
     }
 }
