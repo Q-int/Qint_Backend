@@ -14,8 +14,6 @@ public class GetMyPageService {
 
     private final UserFacade userFacade;
 
-    private final UserIncorrectAnswersRepository userIncorrectAnswersRepository;
-
     public UserAnswersResponse execute() {
         User user = userFacade.getCurrentUser();
 
