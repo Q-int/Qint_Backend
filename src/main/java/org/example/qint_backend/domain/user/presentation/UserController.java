@@ -3,8 +3,8 @@ package org.example.qint_backend.domain.user.presentation;
 import lombok.RequiredArgsConstructor;
 import org.example.qint_backend.domain.user.presentation.dto.response.UserAnswersResponse;
 import org.example.qint_backend.domain.user.presentation.dto.response.UserIncorrectAnswerResponse;
-import org.example.qint_backend.domain.user.service.IncorrectProblemsService;
-import org.example.qint_backend.domain.user.service.MyPageService;
+import org.example.qint_backend.domain.user.service.GetIncorrectProblemsService;
+import org.example.qint_backend.domain.user.service.GetMyPageService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,9 +16,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final MyPageService myPageService;
+    private final GetMyPageService myPageService;
 
-    private final IncorrectProblemsService incorrectProblemsService;
+    private final GetIncorrectProblemsService incorrectProblemsService;
 
     @GetMapping("/info")
     public UserAnswersResponse selectUserInfo() {
