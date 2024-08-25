@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class IncorrectProblemsService {
+public class GetIncorrectProblemsService {
 
     private final UserFacade userFacade;
 
