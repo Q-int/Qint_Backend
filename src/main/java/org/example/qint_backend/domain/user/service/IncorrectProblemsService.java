@@ -26,12 +26,12 @@ public class IncorrectProblemsService {
 
         List<UserIncorrectAnswers> userIncorrectAnswers = userIncorrectAnswersRepository.findAllByUser(user);
 
-        return userIncorrectAnswers.stream().map(userIncorrectAnswers1 -> UserIncorrectAnswerResponse.builder()
-                .contents(userIncorrectAnswers1.getQuestion().getContents())
-                .commentary(userIncorrectAnswers1.getQuestion().getCommentary())
-                .incorrectAnswer(userIncorrectAnswers1.getAnswer().getText())
+        return userIncorrectAnswers.stream().map(incorrectAnswers -> UserIncorrectAnswerResponse.builder()
+                .contents(incorrectAnswers.getQuestion().getContents())
+                .commentary(incorrectAnswers.getQuestion().getCommentary())
+                .incorrectAnswer(incorrectAnswers.getAnswer().getText())
                 .correctAnswer(
-                        answerFacade.getAllByQuestionAndAndIsCorrectIsTrue(userIncorrectAnswers1.getQuestion())
+                        answerFacade.getAllByQuestionAndAndIsCorrectIsTrue(incorrectAnswers.getQuestion())
                                 .getText()
                 )
                 .build()).toList();
