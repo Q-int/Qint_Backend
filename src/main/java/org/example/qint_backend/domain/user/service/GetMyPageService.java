@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class MyPageService {
+public class GetMyPageService {
 
     private final UserFacade userFacade;
 
