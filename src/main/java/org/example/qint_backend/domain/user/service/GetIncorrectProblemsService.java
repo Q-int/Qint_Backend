@@ -31,7 +31,7 @@ public class GetIncorrectProblemsService {
                 .commentary(incorrectAnswers.getQuestion().getCommentary())
                 .incorrectAnswer(incorrectAnswers.getAnswer().getText())
                 .correctAnswer(
-                        answerFacade.getAllByQuestionAndAndIsCorrectIsTrue(incorrectAnswers.getQuestion())
+                        answerFacade.getAllByQuestionAndIsCorrectIsTrue(incorrectAnswers.getQuestion())
                                 .getText()
                 )
                 .build()).toList();
