@@ -16,18 +16,18 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final GetMyPageService myPageService;
+    private final GetMyPageService getMyPageService;
 
-    private final GetIncorrectProblemsService incorrectProblemsService;
+    private final GetIncorrectProblemsService getIncorrectProblemsService;
 
     @GetMapping("/info")
     public UserAnswersResponse selectUserInfo() {
-        return myPageService.execute();
+        return getMyPageService.execute();
     }
 
     @GetMapping("/incorrect-problems")
     public List<UserIncorrectAnswerResponse> selectIncorrectAnswers() {
-        return incorrectProblemsService.execute();
+        return getIncorrectProblemsService.execute();
     }
 
 }
