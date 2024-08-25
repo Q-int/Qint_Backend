@@ -3,6 +3,8 @@ package org.example.qint_backend.domain.user.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
+//merge 전 삭제할 것
+
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
