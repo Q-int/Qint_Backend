@@ -10,4 +10,6 @@ import java.util.List;
 
 @Repository
 public interface UserIncorrectAnswersRepository extends JpaRepository<UserIncorrectAnswers, Long> {
+    List<UserIncorrectAnswerElement> findAllByUser(User user);
+
 }
