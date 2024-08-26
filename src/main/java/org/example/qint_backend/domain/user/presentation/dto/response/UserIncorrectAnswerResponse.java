@@ -8,5 +8,5 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 public class UserIncorrectAnswerResponse {
-    List<UserIncorrectAnswerElement> userIncorrectAnswerList;
+    private final List<UserIncorrectAnswerElement> userIncorrectAnswerElementList;
 }
