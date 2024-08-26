@@ -21,9 +21,12 @@ public enum ErrorCode {
 
     INTERNAL_SERVER_ERROR(500, "server error"),
 
+    ANSWER_NOT_FOUND(500, "answer not found"),
+
     INVALID_TOKEN_EXCEPTION(401, "invalid token exception"),
 
     EXPIRED_TOKEN_EXCEPTION(401,"expired token exception");
+
 
     private final int statusCode;
     private final String message;
