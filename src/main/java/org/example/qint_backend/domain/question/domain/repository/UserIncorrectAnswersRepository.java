@@ -1,4 +1,4 @@
-package org.example.qint_backend.domain.user.domain.repository;
+package org.example.qint_backend.domain.question.domain.repository;
 
 import org.example.qint_backend.domain.question.domain.UserIncorrectAnswers;
 import org.example.qint_backend.domain.user.domain.User;
@@ -10,6 +10,5 @@ import java.util.List;
 
 @Repository
 public interface UserIncorrectAnswersRepository extends JpaRepository<UserIncorrectAnswers, Long> {
-    List<UserIncorrectAnswerElement> findAllByUser(User user);
-
+    List<UserIncorrectAnswers> findAllByUser(User user);
 }
