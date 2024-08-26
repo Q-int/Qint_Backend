@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class IncorrectAnswerResponse {
+public class IncorrectAnswer {
 
     private String contents;
 
