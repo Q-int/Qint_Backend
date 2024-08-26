@@ -1,6 +1,5 @@
 package org.example.qint_backend.domain.user.presentation;
 
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.example.qint_backend.domain.user.presentation.dto.response.UserAnswersResponse;
 import org.example.qint_backend.domain.user.presentation.dto.response.UserIncorrectAnswerResponse;
