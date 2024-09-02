@@ -19,4 +19,4 @@ public class GetJudgmentResultService {
         Long answerId = answerJudgmentRequest.getAnswerId();
         return null;
     }
-}A
+}
