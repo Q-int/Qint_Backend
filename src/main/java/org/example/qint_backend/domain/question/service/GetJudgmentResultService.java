@@ -1,22 +1,46 @@
 package org.example.qint_backend.domain.question.service;
 
 import lombok.RequiredArgsConstructor;
+import org.example.qint_backend.domain.question.domain.Answer;
 import org.example.qint_backend.domain.question.domain.Question;
-import org.example.qint_backend.domain.question.domain.repository.UserIncorrectAnswersRepository;
+import org.example.qint_backend.domain.question.domain.repository.AnswerRepository;
+import org.example.qint_backend.domain.question.domain.repository.QuestionRepository;
 import org.example.qint_backend.domain.question.presentation.dto.request.AnswerJudgmentRequest;
 import org.example.qint_backend.domain.question.presentation.dto.response.AnswerJudgmentResponse;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class GetJudgmentResultService {
-    private final UserIncorrectAnswersRepository userIncorrectAnswersRepository;
+    private final QuestionRepository questionRepository;
+    private final AnswerRepository answerRepository;
 
-    public AnswerJudgmentResponse excute(AnswerJudgmentRequest answerJudgmentRequest){
+    public AnswerJudgmentResponse excute(AnswerJudgmentRequest answerJudgmentRequest) {
         Long questionId = answerJudgmentRequest.getQuestionId();
         Long answerId = answerJudgmentRequest.getAnswerId();
-        return null;
+
+        Question question = questionRepository.findById(questionId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid question ID"));
+
+        Answer submittedAnswer = answerRepository.findById(answerId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid answer ID"));
+
+        if (!submittedAnswer.getQuestion().getId().equals(questionId)) {
+            throw new IllegalArgumentException("Answer does not belong to the given question");
+        }
+
+        Answer correctAnswer = answerRepository.findAll().stream()
+                .filter(answer -> answer.getQuestion().getId().equals(questionId))
+                .filter(Answer::getIsCorrect)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("No correct answer found for the given question"));
+
+        boolean isCorrect = submittedAnswer.getId().equals(correctAnswer.getId());
+
+        return AnswerJudgmentResponse.builder()
+                .answerText(question.getContents())
+                .commentary(question.getCommentary())
+                .isCorrect(isCorrect) //채점 결과
+                .build();
     }
 }
