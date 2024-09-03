@@ -1,9 +1,13 @@
 package org.example.qint_backend.domain.question.domain.repository;
 
 import org.example.qint_backend.domain.question.domain.Question;
+import org.example.qint_backend.domain.user.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface QuestionRepository extends JpaRepository<Question, Long> {
+    List<Question> findAllByCategoryName(String category);
 }
