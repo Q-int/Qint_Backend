@@ -7,7 +7,7 @@ import java.util.List;
 
 @Getter
 @Builder
-public class IncorrectQuestionElement {
+public class QuestionByCategoryElement {
     private Long question_Id;
     private String contents;
     private List<OptionsElement> options;
