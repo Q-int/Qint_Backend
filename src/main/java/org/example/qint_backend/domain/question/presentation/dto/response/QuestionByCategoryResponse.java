@@ -7,6 +7,6 @@ import java.util.List;
 
 @Getter
 @Builder
-public class IncorrectQuestionsResponse {
-    List<IncorrectQuestionElement> questions;
+public class QuestionByCategoryResponse {
+    List<QuestionByCategoryElement> questions;
 }
