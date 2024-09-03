@@ -10,11 +10,8 @@ import org.example.qint_backend.domain.question.presentation.dto.request.Categor
 import org.example.qint_backend.domain.question.presentation.dto.response.OptionsElement;
 import org.example.qint_backend.domain.question.presentation.dto.response.QuestionByCategoryElement;
 import org.example.qint_backend.domain.question.presentation.dto.response.QuestionByCategoryResponse;
-import org.example.qint_backend.domain.user.domain.User;
-import org.example.qint_backend.domain.user.facade.UserFacade;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -29,10 +26,7 @@ public class GetQuestionByCategoryService {
 
     private final AnswerRepository answerRepository;
 
-    private final UserFacade userFacade;
-
     public QuestionByCategoryResponse execute(CategoryRequest categoryRequest) {
-        User user = userFacade.getCurrentUser();
 
         List<String> categorys = categoryRequest.getCategorys();
 
