@@ -42,13 +42,16 @@ public class GetQuestionByCategoryService {
             incorrectQuestions.addAll(userIncorrectAnswersRepository.findAllByQuestionCategoryName(category)
                     .stream().map(UserIncorrectAnswers::getQuestion).toList());
         }
-        Collections.shuffle(incorrectQuestions);
 
         List<Question> questions = null;
         for (String category : categorys) {
             questions.addAll(questionRepository.findAllByCategoryName(category));
         }
+
         questions.removeAll(incorrectQuestions);
+
+        Collections.shuffle(incorrectQuestions);
+
         Collections.shuffle(questions);
 
         incorrectQuestions.addAll(questions);
