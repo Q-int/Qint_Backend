@@ -25,22 +25,23 @@ public class GetJudgmentResultService {
         Answer submittedAnswer = answerRepository.findById(answerId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid answer ID"));
 
-        if (!submittedAnswer.getQuestion().getId().equals(questionId)) {
-            throw new IllegalArgumentException("Answer does not belong to the given question");
+        Boolean isAnswerBelongsToQuestion = submittedAnswer.getQuestion().getId().equals(questionId);
+        if (!isAnswerBelongsToQuestion) {
+            throw new IllegalArgumentException("answer not found");
         }
 
         Answer correctAnswer = answerRepository.findAll().stream()
                 .filter(answer -> answer.getQuestion().getId().equals(questionId))
                 .filter(Answer::getIsCorrect)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("No correct answer found for the given question"));
+                .orElseThrow(() -> new IllegalArgumentException("correct answer not found"));
 
         boolean isCorrect = submittedAnswer.getId().equals(correctAnswer.getId());
 
         return AnswerJudgmentResponse.builder()
                 .answerText(question.getContents())
                 .commentary(question.getCommentary())
-                .isCorrect(isCorrect) //채점 결과
+                .isCorrect(isCorrect)
                 .build();
     }
 }
