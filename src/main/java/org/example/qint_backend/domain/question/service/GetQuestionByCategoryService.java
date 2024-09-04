@@ -28,11 +28,11 @@ public class GetQuestionByCategoryService {
     private static final int MAX_QUESTIONS = 15;
 
     public QuestionByCategoryResponse execute(CategoryRequest categoryRequest) {
-        List<String> categories = categoryRequest.getCategorys();
+        List<String> categorys = categoryRequest.getCategorys();
         List<Question> allQuestions = new ArrayList<>();
         List<Question> incorrectQuestions = new ArrayList<>();
 
-        for (String category : categories) {
+        for (String category : categorys) {
             incorrectQuestions.addAll(userIncorrectAnswersRepository.findAllByQuestionCategoryName(category)
                     .stream()
                     .map(UserIncorrectAnswers::getQuestion)
