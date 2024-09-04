@@ -12,59 +12,61 @@ import org.example.qint_backend.domain.question.presentation.dto.response.Questi
 import org.example.qint_backend.domain.question.presentation.dto.response.QuestionByCategoryResponse;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class GetQuestionByCategoryService {
 
     private final UserIncorrectAnswersRepository userIncorrectAnswersRepository;
-
     private final QuestionRepository questionRepository;
-
     private final AnswerRepository answerRepository;
 
+    private static final int MAX_QUESTIONS = 15;
+
     public QuestionByCategoryResponse execute(CategoryRequest categoryRequest) {
+        List<String> categories = categoryRequest.getCategorys();
+        List<Question> allQuestions = new ArrayList<>();
+        List<Question> incorrectQuestions = new ArrayList<>();
 
-        List<String> categorys = categoryRequest.getCategorys();
-
-        List<Question> incorrectQuestions = null;
-        for (String category : categorys) {
+        for (String category : categories) {
             incorrectQuestions.addAll(userIncorrectAnswersRepository.findAllByQuestionCategoryName(category)
-                    .stream().map(UserIncorrectAnswers::getQuestion).toList());
+                    .stream()
+                    .map(UserIncorrectAnswers::getQuestion)
+                    .toList());
+
+            allQuestions.addAll(questionRepository.findAllByCategoryName(category));
         }
 
-        List<Question> questions = null;
-        for (String category : categorys) {
-            questions.addAll(questionRepository.findAllByCategoryName(category));
-        }
+        allQuestions.removeAll(incorrectQuestions);
 
-        questions.removeAll(incorrectQuestions);
+        Collections.shuffle(incorrectQuestions);
+        Collections.shuffle(allQuestions);
+
+        incorrectQuestions.addAll(allQuestions);
+
+        incorrectQuestions = incorrectQuestions.stream()
+                .limit(MAX_QUESTIONS)
+                .collect(Collectors.toList());
 
         Collections.shuffle(incorrectQuestions);
 
-        Collections.shuffle(questions);
-
-        incorrectQuestions.addAll(questions);
-
-        incorrectQuestions = incorrectQuestions.subList(0, 15);
-
-        Collections.shuffle(incorrectQuestions);
-
-        return QuestionByCategoryResponse.builder().questions(
-                incorrectQuestions.stream()
+        return QuestionByCategoryResponse.builder()
+                .questions(incorrectQuestions.stream()
                         .map(question -> QuestionByCategoryElement.builder()
                                 .question_Id(question.getId())
+                                .contents(question.getContents())
                                 .options(answerRepository.findAllByQuestion(question).stream()
-                                        .map(a -> OptionsElement.builder()
-                                                .answerId(a.getId())
-                                                .text(a.getText()).build())
-                                        .toList())
-                                .contents(question.getContents()).build())
-                        .toList())
+                                        .map(answer -> OptionsElement.builder()
+                                                .answerId(answer.getId())
+                                                .text(answer.getText())
+                                                .build())
+                                        .collect(Collectors.toList()))
+                                .build())
+                        .collect(Collectors.toList()))
                 .build();
-
     }
 }
