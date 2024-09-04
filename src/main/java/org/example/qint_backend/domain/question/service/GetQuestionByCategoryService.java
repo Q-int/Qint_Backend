@@ -30,7 +30,6 @@ public class GetQuestionByCategoryService {
 
         List<String> categorys = categoryRequest.getCategorys();
 
-
         List<Question> incorrectQuestions = null;
         for (String category : categorys) {
             incorrectQuestions.addAll(userIncorrectAnswersRepository.findAllByQuestionCategoryName(category)
