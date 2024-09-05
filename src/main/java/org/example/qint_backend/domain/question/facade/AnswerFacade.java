@@ -17,4 +17,9 @@ public class AnswerFacade {
         return answerRepository.findAllByQuestionAndIsCorrectIsTrue(question)
                 .orElseThrow(() -> AnswerNotFoundException.EXCEPTION);
     }
+
+    public Answer getFindByQuestionIdAndIsCorrectTrue(Question question) {
+        return answerRepository.findByQuestionIdAndIsCorrectTrue(question)
+                .orElseThrow(()-> AnswerNotFoundException.EXCEPTION);
+    }
 }
