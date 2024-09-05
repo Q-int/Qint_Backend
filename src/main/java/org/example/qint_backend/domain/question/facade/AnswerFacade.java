@@ -18,8 +18,8 @@ public class AnswerFacade {
                 .orElseThrow(() -> AnswerNotFoundException.EXCEPTION);
     }
 
-    public Answer getFindByQuestionIdAndIsCorrectTrue(Question question) {
-        return answerRepository.findByQuestionIdAndIsCorrectTrue(question)
-                .orElseThrow(()-> AnswerNotFoundException.EXCEPTION);
+    public Answer getFindByQuestionIdAndIsCorrectIsTrue(Question questionId) {
+        return answerRepository.findByQuestionIdAndIsCorrectIsTrue(questionId)
+                .orElseThrow(()->new IllegalArgumentException("Correct answer not found"));
     }
 }
