@@ -5,6 +5,7 @@ import org.example.qint_backend.domain.question.domain.Answer;
 import org.example.qint_backend.domain.question.domain.Question;
 import org.example.qint_backend.domain.question.domain.repository.AnswerRepository;
 import org.example.qint_backend.domain.question.domain.repository.QuestionRepository;
+import org.example.qint_backend.domain.question.facade.AnswerFacade;
 import org.example.qint_backend.domain.question.presentation.dto.request.AnswerJudgmentRequest;
 import org.example.qint_backend.domain.question.presentation.dto.response.AnswerJudgmentResponse;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 public class GetJudgmentResultService {
     private final QuestionRepository questionRepository;
     private final AnswerRepository answerRepository;
+    private final AnswerFacade answerFacade;
 
     public AnswerJudgmentResponse excute(AnswerJudgmentRequest answerJudgmentRequest) {
         Long questionId = answerJudgmentRequest.getQuestionId();
@@ -25,7 +27,7 @@ public class GetJudgmentResultService {
         Answer submittedAnswer = answerRepository.findById(answerId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid answer ID"));
 
-        Boolean isAnswerBelongsToQuestion = submittedAnswer.getQuestion().getId().equals(questionId);
+        boolean isAnswerBelongsToQuestion = submittedAnswer.getQuestion().getId().equals(questionId);
 
         if (!isAnswerBelongsToQuestion) {
             throw new IllegalArgumentException("question not found");
