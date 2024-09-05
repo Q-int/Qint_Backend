@@ -57,7 +57,7 @@ public class GetQuestionByCategoryService {
         return QuestionByCategoryResponse.builder()
                 .questions(incorrectQuestions.stream()
                         .map(question -> QuestionByCategoryElement.builder()
-                                .question_Id(question.getId())
+                                .question_id(question.getId())
                                 .contents(question.getContents())
                                 .options(answerRepository.findAllByQuestion(question).stream()
                                         .map(answer -> OptionsElement.builder()
