@@ -29,17 +29,13 @@ public class GetJudgmentResultService {
 
         boolean isSubmittedAnswerBelongsToQuestion = submittedAnswer.getQuestion().getId().equals(questionId);
 
-        if (!isSubmittedAnswerBelongsToQuestion) {
-            throw new IllegalArgumentException("question not found");
-        }
-
-        Answer correctAnswer = answerRepository.findAll().stream()
-                .filter(answer -> answer.getQuestion().getId().equals(questionId))
-                .filter(Answer::getIsCorrect)
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("correct answer not found"));
+        Answer correctAnswer = answerFacade.getFindByQuestionIdAndIsCorrectIsTrue(questionId);
 
         boolean isCorrect = submittedAnswer.getId().equals(correctAnswer.getId());
+
+        if (!isSubmittedAnswerBelongsToQuestion || !isCorrect) {
+            //오답 문제 저장 함수 사용
+        }
 
         return AnswerJudgmentResponse.builder()
                 .answerText(question.getContents())
@@ -47,4 +43,5 @@ public class GetJudgmentResultService {
                 .isCorrect(isCorrect)
                 .build();
     }
+    //오답 문제 저장 함수 작성
 }
