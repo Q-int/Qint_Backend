@@ -10,5 +10,5 @@ import java.util.Optional;
 @Repository
 public interface AnswerRepository extends JpaRepository<Answer, Long> {
     Optional<Answer> findAllByQuestionAndIsCorrectIsTrue(Question question);
-    Optional<Answer> findByQuestionIdAndIsCorrectIsTrue(Question question);
+    Optional<Answer> findByQuestionIdAndIsCorrectIsTrue(Long questionId);
 }
