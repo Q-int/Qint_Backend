@@ -21,6 +21,10 @@ public class GetJudgmentResultService {
         Long questionId = answerJudgmentRequest.getQuestionId();
         Long answerId = answerJudgmentRequest.getAnswerId();
 
+        if(questionId == null && answerId == null){
+            //오답 문제 저장 함수 호출
+        }
+
         Question question = questionRepository.findById(questionId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid question ID"));
 
