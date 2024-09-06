@@ -20,6 +20,6 @@ public class AnswerFacade {
 
     public Answer getFindByQuestionIdAndIsCorrectIsTrue(Long questionId) {
         return answerRepository.findByQuestionIdAndIsCorrectIsTrue(questionId)
-                .orElseThrow(()->new IllegalArgumentException("Correct answer not found"));
+                .orElseThrow(() -> AnswerNotFoundException.EXCEPTION);
     }
 }

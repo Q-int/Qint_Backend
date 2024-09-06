@@ -27,9 +27,9 @@ public class GetJudgmentResultService {
         Answer submittedAnswer = answerRepository.findById(answerId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid answer ID"));
 
-        boolean isAnswerBelongsToQuestion = submittedAnswer.getQuestion().getId().equals(questionId);
+        boolean isSubmittedAnswerBelongsToQuestion = submittedAnswer.getQuestion().getId().equals(questionId);
 
-        if (!isAnswerBelongsToQuestion) {
+        if (!isSubmittedAnswerBelongsToQuestion) {
             throw new IllegalArgumentException("question not found");
         }
 
