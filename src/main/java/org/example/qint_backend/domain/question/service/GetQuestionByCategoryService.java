@@ -1,6 +1,7 @@
 package org.example.qint_backend.domain.question.service;
 
 import lombok.RequiredArgsConstructor;
+import org.example.qint_backend.domain.question.domain.Category;
 import org.example.qint_backend.domain.question.domain.Question;
 import org.example.qint_backend.domain.question.domain.UserIncorrectAnswers;
 import org.example.qint_backend.domain.question.domain.repository.AnswerRepository;
@@ -33,12 +34,12 @@ public class GetQuestionByCategoryService {
         List<Question> incorrectQuestions = new ArrayList<>();
 
         for (String category : categorys) {
-            incorrectQuestions.addAll(userIncorrectAnswersRepository.findAllByQuestionCategoryName(category)
+            incorrectQuestions.addAll(userIncorrectAnswersRepository.findAllByQuestionCategory(Category.valueOf(category))
                     .stream()
                     .map(UserIncorrectAnswers::getQuestion)
                     .toList());
 
-            allQuestions.addAll(questionRepository.findAllByCategoryName(category));
+            allQuestions.addAll(questionRepository.findAllByCategory(Category.valueOf(category)));
         }
 
         allQuestions.removeAll(incorrectQuestions);
