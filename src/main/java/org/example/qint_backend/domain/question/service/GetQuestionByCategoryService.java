@@ -28,8 +28,8 @@ public class GetQuestionByCategoryService {
 
     private static final int MAX_QUESTIONS = 15;
 
-    public QuestionByCategoryResponse execute(CategoryRequest categoryRequest) {
-        List<String> categorys = categoryRequest.getCategorys();
+    public QuestionByCategoryResponse execute(CategoryRequest request) {
+        List<String> categorys = request.getCategorys();
         List<Question> allQuestions = new ArrayList<>();
         List<Question> incorrectQuestions = new ArrayList<>();
 
