@@ -18,7 +18,7 @@ public class QuestionController {
 
     @GetMapping
     public QuestionByCategoryResponse getQuestionsByCategory(
-            @RequestParam(name = "categorys", required = false) CategoryRequest request
+            @RequestParam(name = "categorys") CategoryRequest request
     ) {
         return getQuestionByCategoryService.execute(request);
     }
