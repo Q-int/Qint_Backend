@@ -32,6 +32,7 @@ public class GetQuestionByCategoryService {
         List<String> categories = request.getCategories();
         List<Question> allQuestions = new ArrayList<>();
         List<Question> incorrectQuestions = new ArrayList<>();
+        List<Question> examQuestions = new ArrayList<>();
 
         for (String category : categories) {
             incorrectQuestions.addAll(userIncorrectAnswersRepository.findAllByQuestionCategory(Category.valueOf(category))
@@ -47,16 +48,17 @@ public class GetQuestionByCategoryService {
         Collections.shuffle(incorrectQuestions);
         Collections.shuffle(allQuestions);
 
-        incorrectQuestions.addAll(allQuestions);
+        examQuestions.addAll(incorrectQuestions);
+        examQuestions.addAll(allQuestions);
 
-        incorrectQuestions = incorrectQuestions.stream()
+        examQuestions = examQuestions.stream()
                 .limit(MAX_QUESTIONS)
                 .collect(Collectors.toList());
 
         Collections.shuffle(incorrectQuestions);
 
         return QuestionByCategoryResponse.builder()
-                .questions(incorrectQuestions.stream()
+                .questions(examQuestions.stream()
                         .map(question -> QuestionByCategoryElement.builder()
                                 .questionId(question.getId())
                                 .contents(question.getContents())
