@@ -12,6 +12,7 @@ import org.example.qint_backend.domain.question.presentation.dto.response.Option
 import org.example.qint_backend.domain.question.presentation.dto.response.QuestionByCategoryElement;
 import org.example.qint_backend.domain.question.presentation.dto.response.QuestionByCategoryResponse;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,6 +29,7 @@ public class GetQuestionByCategoryService {
 
     private static final int MAX_QUESTIONS = 15;
 
+    @Transactional
     public QuestionByCategoryResponse execute(CategoryRequest request) {
         List<String> categories = request.getCategories();
         List<Question> allQuestions = new ArrayList<>();
