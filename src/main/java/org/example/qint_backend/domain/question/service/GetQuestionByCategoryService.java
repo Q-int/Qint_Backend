@@ -36,12 +36,14 @@ public class GetQuestionByCategoryService {
         List<Question> examQuestions = new ArrayList<>();
 
         for (String category : categories) {
-            examQuestions.addAll(userIncorrectAnswersRepository.findAllByQuestionCategory(Category.valueOf(category))
+            Category categoryEnum = Category.valueOf(category);
+
+            examQuestions.addAll(userIncorrectAnswersRepository.findAllByQuestionCategory(categoryEnum)
                     .stream()
                     .map(UserIncorrectAnswers::getQuestion)
                     .toList());
 
-            allQuestions.addAll(questionRepository.findAllByCategory(Category.valueOf(category)));
+            allQuestions.addAll(questionRepository.findAllByCategory(categoryEnum));
 
             for (Question question : allQuestions) {
                 if(!examQuestions.contains(question)) {
