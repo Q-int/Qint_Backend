@@ -33,25 +33,22 @@ public class GetQuestionByCategoryService {
     public QuestionByCategoryResponse execute(CategoryRequest request) {
         List<String> categories = request.getCategories();
         List<Question> allQuestions = new ArrayList<>();
-        List<Question> incorrectQuestions = new ArrayList<>();
         List<Question> examQuestions = new ArrayList<>();
 
         for (String category : categories) {
-            incorrectQuestions.addAll(userIncorrectAnswersRepository.findAllByQuestionCategory(Category.valueOf(category))
+            examQuestions.addAll(userIncorrectAnswersRepository.findAllByQuestionCategory(Category.valueOf(category))
                     .stream()
                     .map(UserIncorrectAnswers::getQuestion)
                     .toList());
 
             allQuestions.addAll(questionRepository.findAllByCategory(Category.valueOf(category)));
+
+            for (Question question : allQuestions) {
+                if(!examQuestions.contains(question)) {
+                    examQuestions.add(question);
+                }
+            }
         }
-
-        allQuestions.removeAll(incorrectQuestions);
-
-        Collections.shuffle(incorrectQuestions);
-        Collections.shuffle(allQuestions);
-
-        examQuestions.addAll(incorrectQuestions);
-        examQuestions.addAll(allQuestions);
 
         examQuestions = examQuestions.stream()
                 .limit(MAX_QUESTIONS)
