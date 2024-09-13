@@ -57,7 +57,7 @@ public class GetQuestionByCategoryService {
                 .limit(MAX_QUESTIONS)
                 .collect(Collectors.toList());
 
-        Collections.shuffle(incorrectQuestions);
+        Collections.shuffle(examQuestions);
 
         List<QuestionByCategoryElement> questionByCategoryElements = examQuestions.stream()
                 .map(question -> {
