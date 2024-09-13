@@ -57,19 +57,16 @@ public class GetQuestionByCategoryService {
 
         Collections.shuffle(incorrectQuestions);
 
-        return QuestionByCategoryResponse.builder()
-                .questions(examQuestions.stream()
-                        .map(question -> QuestionByCategoryElement.builder()
-                                .questionId(question.getId())
-                                .contents(question.getContents())
-                                .options(answerRepository.findAllByQuestion(question).stream()
-                                        .map(answer -> OptionsElement.builder()
-                                                .answerId(answer.getId())
-                                                .text(answer.getText())
-                                                .build())
-                                        .collect(Collectors.toList()))
-                                .build())
-                        .collect(Collectors.toList()))
-                .build();
+        List<QuestionByCategoryElement> questionByCategoryElements = examQuestions.stream()
+                .map(question -> {
+                    List<OptionsElement> optionsElements = answerRepository.findAllByQuestion(question).stream()
+                            .map(answer -> new OptionsElement(answer.getId(), answer.getText()))
+                            .collect(Collectors.toList());
+
+                    return new QuestionByCategoryElement(question.getId(), question.getContents(), optionsElements);
+                })
+                .collect(Collectors.toList());
+
+        return new QuestionByCategoryResponse(questionByCategoryElements);
     }
 }
