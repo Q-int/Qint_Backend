@@ -9,4 +9,8 @@ import java.util.List;
 @Builder
 public class QuestionByCategoryResponse {
     List<QuestionByCategoryElement> questions;
+
+    public QuestionByCategoryResponse(List<QuestionByCategoryElement> questions) {
+        this.questions = questions;
+    }
 }
