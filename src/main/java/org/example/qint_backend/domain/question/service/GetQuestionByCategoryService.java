@@ -66,7 +66,7 @@ public class GetQuestionByCategoryService {
 
                     return new QuestionByCategoryElement(question.getId(), question.getContents(), optionsElements);
                 })
-                .collect(Collectors.toList());
+                .toList();
 
         return new QuestionByCategoryResponse(questionByCategoryElements);
     }
