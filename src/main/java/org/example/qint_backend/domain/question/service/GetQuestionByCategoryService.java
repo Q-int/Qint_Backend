@@ -29,7 +29,7 @@ public class GetQuestionByCategoryService {
 
     private static final int MAX_QUESTIONS = 15;
 
-    @Transactional
+    @Transactional(readOnly = true)
     public QuestionByCategoryResponse execute(CategoryRequest request) {
         List<String> categories = request.getCategories();
         List<Question> allQuestions = new ArrayList<>();
