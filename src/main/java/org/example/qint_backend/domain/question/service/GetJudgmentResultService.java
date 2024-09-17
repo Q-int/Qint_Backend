@@ -5,6 +5,7 @@ import org.example.qint_backend.domain.question.domain.Answer;
 import org.example.qint_backend.domain.question.domain.Question;
 import org.example.qint_backend.domain.question.domain.repository.AnswerRepository;
 import org.example.qint_backend.domain.question.domain.repository.QuestionRepository;
+import org.example.qint_backend.domain.question.domain.repository.UserIncorrectAnswersRepository;
 import org.example.qint_backend.domain.question.facade.AnswerFacade;
 import org.example.qint_backend.domain.question.presentation.dto.request.AnswerJudgmentRequest;
 import org.example.qint_backend.domain.question.presentation.dto.response.AnswerJudgmentResponse;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 public class GetJudgmentResultService {
     private final QuestionRepository questionRepository;
     private final AnswerRepository answerRepository;
+    private final UserIncorrectAnswersRepository userIncorrectAnswersRepository;
     private final AnswerFacade answerFacade;
 
     public AnswerJudgmentResponse excute(AnswerJudgmentRequest answerJudgmentRequest) {
@@ -31,14 +33,12 @@ public class GetJudgmentResultService {
         Answer submittedAnswer = answerRepository.findById(answerId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid answer ID"));
 
-        boolean isSubmittedAnswerBelongsToQuestion = submittedAnswer.getQuestion().getId().equals(questionId);
-
         Answer correctAnswer = answerFacade.getFindByQuestionIdAndIsCorrectIsTrue(questionId);
 
         boolean isCorrect = submittedAnswer.getId().equals(correctAnswer.getId());
 
-        if (!isSubmittedAnswerBelongsToQuestion || !isCorrect) {
-            //오답 문제 저장 함수 사용
+        if (!isCorrect) {
+            //오답 문제 저장 함수 호출
         }
 
         return AnswerJudgmentResponse.builder()
@@ -47,5 +47,4 @@ public class GetJudgmentResultService {
                 .isCorrect(isCorrect)
                 .build();
     }
-    //오답 문제 저장 함수 작성
 }
