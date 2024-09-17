@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/problems")
+@RequestMapping("/questions")
 public class QuestionController {
 
     private final GetQuestionByCategoryService getQuestionByCategoryService;
