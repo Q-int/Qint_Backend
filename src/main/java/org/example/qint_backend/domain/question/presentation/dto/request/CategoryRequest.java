@@ -6,5 +6,5 @@ import java.util.List;
 
 @Getter
 public class CategoryRequest {
-    List<String> categories;
+    public List<String> categories;
 }
