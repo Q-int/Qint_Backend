@@ -61,7 +61,7 @@ public class GetQuestionByCategoryService {
         List<QuestionByCategoryElement> questionByCategoryElements = examQuestions.stream()
                 .map(question -> {
                     List<OptionsElement> optionsElements = answerRepository.findAllByQuestion(question).stream()
-                            .map(answer -> new OptionsElement(answer.getId(), answer.getText()))
+                            .map(OptionsElement::of)
                             .collect(Collectors.toList());
 
                     return new QuestionByCategoryElement(question.getId(), question.getContents(), optionsElements);
