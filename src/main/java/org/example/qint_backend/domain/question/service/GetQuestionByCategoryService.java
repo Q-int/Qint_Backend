@@ -14,6 +14,7 @@ import org.example.qint_backend.domain.question.presentation.dto.response.Questi
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class GetQuestionByCategoryService {
 
     private final UserIncorrectAnswersRepository userIncorrectAnswersRepository;
@@ -29,7 +31,6 @@ public class GetQuestionByCategoryService {
 
     private static final int MAX_QUESTIONS = 15;
 
-    @Transactional(readOnly = true)
     public QuestionByCategoryResponse execute(CategoryRequest request) {
         List<String> categories = request.getCategories();
         List<Question> allQuestions = new ArrayList<>();
