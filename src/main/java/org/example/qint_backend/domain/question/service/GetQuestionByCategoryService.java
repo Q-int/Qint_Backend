@@ -14,7 +14,6 @@ import org.example.qint_backend.domain.question.presentation.dto.response.Questi
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
