@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -53,7 +54,7 @@ public class GetQuestionByCategoryService {
 
         examQuestions = examQuestions.stream()
                 .limit(MAX_QUESTIONS)
-                .toList();
+                .collect(Collectors.toList());
 
         Collections.shuffle(examQuestions);
 
