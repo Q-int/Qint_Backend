@@ -20,7 +20,7 @@ public class Question {
     @Column(name = "contents", length = 255, nullable = false, updatable = false)
     private String contents;
 
-    @Column(name = "comentary", length = 255, nullable = false, updatable = false)
+    @Column(name = "commentary", length = 255, nullable = false, updatable = false)
     private String commentary;
 
     @Column(name = "category", nullable = false, updatable = false)
