@@ -28,7 +28,7 @@ public class QuestionController {
     public AnswerJudgmentResponse getJudgementResultService(
             @RequestBody AnswerJudgmentRequest request
     ){
-        return getJudgmentResultService.excute(request);
+        return getJudgmentResultService.execute(request);
     }
 
 }

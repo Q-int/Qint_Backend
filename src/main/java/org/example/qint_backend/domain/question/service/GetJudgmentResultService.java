@@ -23,7 +23,7 @@ public class GetJudgmentResultService {
     private final AnswerFacade answerFacade;
     private final UserFacade userFacade;
 
-    public AnswerJudgmentResponse excute(AnswerJudgmentRequest answerJudgmentRequest) {
+    public AnswerJudgmentResponse execute(AnswerJudgmentRequest answerJudgmentRequest) {
         Long questionId = answerJudgmentRequest.getQuestionId();
         Long answerId = answerJudgmentRequest.getAnswerId();
 
