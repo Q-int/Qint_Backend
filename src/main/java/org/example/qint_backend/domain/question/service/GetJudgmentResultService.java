@@ -21,7 +21,7 @@ public class GetJudgmentResultService {
     private final AnswerRepository answerRepository;
     private final UserIncorrectAnswersRepository userIncorrectAnswersRepository;
     private final AnswerFacade answerFacade;
-    private final UserFacaIT GITde userFacade;
+    private final UserFacade userFacade;
 
     public AnswerJudgmentResponse excute(AnswerJudgmentRequest answerJudgmentRequest) {
         Long questionId = answerJudgmentRequest.getQuestionId();
