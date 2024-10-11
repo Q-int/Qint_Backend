@@ -21,7 +21,7 @@ public class GetJudgmentResultService {
     private final AnswerRepository answerRepository;
     private final UserIncorrectAnswersRepository userIncorrectAnswersRepository;
     private final AnswerFacade answerFacade;
-    private final UserFacade userFacade;
+    private final UserFacaIT GITde userFacade;
 
     public AnswerJudgmentResponse excute(AnswerJudgmentRequest answerJudgmentRequest) {
         Long questionId = answerJudgmentRequest.getQuestionId();
@@ -38,7 +38,7 @@ public class GetJudgmentResultService {
         boolean isCorrect = submittedAnswer.getId().equals(correctAnswer.getId());
 
         if (!isCorrect) {
-            saveUserIncorrectAnswer();
+            saveUserIncorrectAnswer(question, submittedAnswer);
         }
 
         return AnswerJudgmentResponse.builder()
@@ -48,10 +48,14 @@ public class GetJudgmentResultService {
                 .build();
     }
 
-    private void saveUserIncorrectAnswer(){
+    private void saveUserIncorrectAnswer(Question question, Answer submittedAnswer){
         User user = userFacade.getCurrentUser();
         userIncorrectAnswersRepository.save(
-                UserIncorrectAnswers.builder().build()
+                UserIncorrectAnswers.builder()
+                        .user(user)
+                        .question(question)
+                        .answer(submittedAnswer)
+                        .build()
         );
     }
 }
