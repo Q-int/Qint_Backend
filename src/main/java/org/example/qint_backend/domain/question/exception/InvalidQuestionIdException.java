@@ -7,7 +7,7 @@ public class InvalidQuestionIdException extends QintException {
 
     public static final QintException EXCEPTION = new InvalidQuestionIdException();
 
-    private InvalidQuestionIdException() {
+    public InvalidQuestionIdException() {
         super(ErrorCode.INVALID_QUESTION_ID_EXCEPTION);
     }
 }

@@ -7,11 +7,14 @@ import org.example.qint_backend.domain.question.domain.UserIncorrectAnswers;
 import org.example.qint_backend.domain.question.domain.repository.AnswerRepository;
 import org.example.qint_backend.domain.question.domain.repository.QuestionRepository;
 import org.example.qint_backend.domain.question.domain.repository.UserIncorrectAnswersRepository;
+import org.example.qint_backend.domain.question.exception.InvalidAnswerIdException;
+import org.example.qint_backend.domain.question.exception.InvalidQuestionIdException;
 import org.example.qint_backend.domain.question.facade.AnswerFacade;
 import org.example.qint_backend.domain.question.presentation.dto.request.AnswerJudgmentRequest;
 import org.example.qint_backend.domain.question.presentation.dto.response.AnswerJudgmentResponse;
 import org.example.qint_backend.domain.user.domain.User;
 import org.example.qint_backend.domain.user.facade.UserFacade;
+import org.example.qint_backend.global.err.exception.ErrorCode;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -28,10 +31,10 @@ public class GetJudgmentResultService {
         Long answerId = answerJudgmentRequest.getAnswerId();
 
         Question question = questionRepository.findById(questionId)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid question ID"));
+                .orElseThrow(() -> InvalidQuestionIdException.EXCEPTION);
 
         Answer submittedAnswer = answerRepository.findById(answerId)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid answer ID"));
+                .orElseThrow(() -> InvalidAnswerIdException.EXCEPTION);
 
         Answer correctAnswer = answerFacade.getFindByQuestionIdAndIsCorrectIsTrue(questionId);
 
