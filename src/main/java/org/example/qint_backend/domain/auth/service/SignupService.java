@@ -36,7 +36,7 @@ public class SignupService {
                 .email(email)
                 .password(password)
                 .correctAnswers(0L)
-                .incorrectAnswer(0L)
+                .incorrectAnswers(0L)
                 .build();
 
         userRepository.save(user);

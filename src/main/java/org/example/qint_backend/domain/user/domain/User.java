@@ -1,15 +1,17 @@
 package org.example.qint_backend.domain.user.domain;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+//merge 전 삭제할 것
+
+@Entity
 @Getter
-@NoArgsConstructor
-@Entity(name = "tbl_user")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@Builder
+@Table(name = "tbl_user")
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,12 +27,4 @@ public class User {
 
     @Column(name = "incorrectAnswers", nullable = false)
     private Long incorrectAnswers;
-
-    @Builder
-    public User(String email, String password, Long correctAnswers, Long incorrectAnswer) {
-        this.email = email;
-        this.password = password;
-        this.correctAnswers = correctAnswers;
-        this.incorrectAnswers = incorrectAnswer;
-    }
 }

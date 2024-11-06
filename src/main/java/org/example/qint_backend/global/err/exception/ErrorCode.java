@@ -25,8 +25,11 @@ public enum ErrorCode {
 
     INVALID_TOKEN_EXCEPTION(401, "invalid token exception"),
 
-    EXPIRED_TOKEN_EXCEPTION(401,"expired token exception");
+    EXPIRED_TOKEN_EXCEPTION(401,"expired token exception"),
 
+    INVALID_QUESTION_ID_EXCEPTION(401, "invalid questionId exception"),
+
+    INVALID_ANSWER_ID_EXCEPTION(401, "invalid answerId exception");
 
     private final int statusCode;
     private final String message;

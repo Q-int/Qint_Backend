@@ -10,5 +10,4 @@ public class AnswerNotFoundException extends QintException{
     private AnswerNotFoundException() {
         super(ErrorCode.ANSWER_NOT_FOUND);
     }
-
 }
