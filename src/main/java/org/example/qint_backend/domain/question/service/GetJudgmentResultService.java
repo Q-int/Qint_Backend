@@ -46,7 +46,7 @@ public class GetJudgmentResultService {
         return AnswerJudgmentResponse.builder()
                 .answer_text(question.getContents())
                 .commentary(question.getCommentary())
-                .isCorrect(isCorrect)
+                .is_correct(isCorrect)
                 .build();
     }
 

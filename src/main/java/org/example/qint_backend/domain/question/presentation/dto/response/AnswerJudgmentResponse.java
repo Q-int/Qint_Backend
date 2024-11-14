@@ -8,5 +8,5 @@ import lombok.Getter;
 public class AnswerJudgmentResponse {
     private String answer_text;
     private String commentary;
-    private Boolean isCorrect;
+    private Boolean is_correct;
 }
