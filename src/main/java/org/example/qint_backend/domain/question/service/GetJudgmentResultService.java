@@ -14,7 +14,6 @@ import org.example.qint_backend.domain.question.presentation.dto.request.AnswerJ
 import org.example.qint_backend.domain.question.presentation.dto.response.AnswerJudgmentResponse;
 import org.example.qint_backend.domain.user.domain.User;
 import org.example.qint_backend.domain.user.facade.UserFacade;
-import org.example.qint_backend.global.err.exception.ErrorCode;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -27,8 +26,8 @@ public class GetJudgmentResultService {
     private final UserFacade userFacade;
 
     public AnswerJudgmentResponse execute(AnswerJudgmentRequest answerJudgmentRequest) {
-        Long questionId = answerJudgmentRequest.getQuestionId();
-        Long answerId = answerJudgmentRequest.getAnswerId();
+        Long questionId = answerJudgmentRequest.getQuestion_id();
+        Long answerId = answerJudgmentRequest.getAnswer_id();
 
         Question question = questionRepository.findById(questionId)
                 .orElseThrow(() -> InvalidQuestionIdException.EXCEPTION);
@@ -45,9 +44,9 @@ public class GetJudgmentResultService {
         }
 
         return AnswerJudgmentResponse.builder()
-                .answerText(question.getContents())
+                .answer_text(question.getContents())
                 .commentary(question.getCommentary())
-                .isCorrect(isCorrect)
+                .is_correct(isCorrect)
                 .build();
     }
 

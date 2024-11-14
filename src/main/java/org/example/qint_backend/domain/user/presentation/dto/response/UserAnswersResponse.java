@@ -7,8 +7,8 @@ import lombok.Getter;
 @Builder
 public class UserAnswersResponse {
 
-    private Long correctAnswers;
+    private Long correct_answers;
 
-    private Long incorrectAnswers;
+    private Long incorrect_answers;
 
 }

@@ -28,7 +28,7 @@ public class SignupService {
             throw UserAlreadyExistsException.EXCEPTION;
         }
 
-        if (!emailVerificationFacade.getEmailVerificationByEmail(email).getIsVerified()) {
+        if (!emailVerificationFacade.getEmailVerificationByEmail(email).getIs_verified()) {
             throw EmailNotVerifiedException.EXCEPTION;
         }
 
