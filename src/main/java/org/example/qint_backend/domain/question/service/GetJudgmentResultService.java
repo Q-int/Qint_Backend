@@ -40,11 +40,13 @@ public class GetJudgmentResultService {
         boolean isCorrect = submittedAnswer.getId().equals(correctAnswer.getId());
 
         if (!isCorrect) {
-            saveUserIncorrectAnswer(question, submittedAnswer);
+            if (!userIncorrectAnswersRepository.existsByQuestion_Id(questionId)) {
+                saveUserIncorrectAnswer(question, submittedAnswer);
+            }
         }
 
         return AnswerJudgmentResponse.builder()
-                .answer_text(question.getContents())
+                .answer_text(correctAnswer.getText())
                 .commentary(question.getCommentary())
                 .is_correct(isCorrect)
                 .build();
