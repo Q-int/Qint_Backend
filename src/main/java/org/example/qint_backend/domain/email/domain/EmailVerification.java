@@ -22,7 +22,7 @@ public class EmailVerification {
     private String auth_code;
 
     @Column(nullable = false)
-    private Boolean isVerified = false;
+    private Boolean is_verified = false;
 
     @Column(nullable = false)
     private LocalDateTime createdAt;
@@ -30,7 +30,7 @@ public class EmailVerification {
     public EmailVerification(String email, String auth_code) {
         this.email = email;
         this.auth_code = auth_code;
-        this.isVerified = false;
+        this.is_verified = false;
         this.createdAt = LocalDateTime.now();
     }
 
@@ -39,6 +39,6 @@ public class EmailVerification {
     }
 
     public void verify() {
-        this.isVerified = true;
+        this.is_verified = true;
     }
 }
