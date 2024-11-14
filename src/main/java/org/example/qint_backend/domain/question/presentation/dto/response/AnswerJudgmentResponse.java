@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 @Builder
 public class AnswerJudgmentResponse {
-    private String answerText;
+    private String answer_text;
     private String commentary;
     private Boolean isCorrect;
 }
