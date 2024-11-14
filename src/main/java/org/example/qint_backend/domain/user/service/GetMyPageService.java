@@ -17,8 +17,8 @@ public class GetMyPageService {
         User user = userFacade.getCurrentUser();
 
         return UserAnswersResponse.builder()
-                .correctAnswers(user.getCorrectAnswers())
-                .incorrectAnswers(user.getIncorrectAnswers())
+                .correct_answers(user.getCorrectAnswers())
+                .incorrect_answers(user.getIncorrectAnswers())
                 .build();
     }
 
