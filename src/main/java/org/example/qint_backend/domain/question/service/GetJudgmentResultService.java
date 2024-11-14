@@ -26,8 +26,8 @@ public class GetJudgmentResultService {
     private final UserFacade userFacade;
 
     public AnswerJudgmentResponse execute(AnswerJudgmentRequest answerJudgmentRequest) {
-        Long questionId = answerJudgmentRequest.getQuestionId();
-        Long answerId = answerJudgmentRequest.getAnswerId();
+        Long questionId = answerJudgmentRequest.getQuestion_id();
+        Long answerId = answerJudgmentRequest.getAnswer_id();
 
         Question question = questionRepository.findById(questionId)
                 .orElseThrow(() -> InvalidQuestionIdException.EXCEPTION);
