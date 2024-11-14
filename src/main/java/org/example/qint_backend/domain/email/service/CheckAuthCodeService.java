@@ -18,7 +18,7 @@ public class CheckAuthCodeService {
     public CheckAuthCodeResponse execute(CheckAuthCodeRequest checkAuthCodeRequest) {
         EmailVerification emailVerification = emailVerificationFacade.getEmailVerificationByEmail(checkAuthCodeRequest.getEmail());
 
-        if (emailVerification.getAuthCode().equals(checkAuthCodeRequest.getAuthCode())) {
+        if (emailVerification.getAuth_code().equals(checkAuthCodeRequest.getAuthCode())) {
             emailVerification.verify();
             return CheckAuthCodeResponse.builder().isVerified(true).build();
         }
