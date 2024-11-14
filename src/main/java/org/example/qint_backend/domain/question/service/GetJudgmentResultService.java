@@ -14,7 +14,6 @@ import org.example.qint_backend.domain.question.presentation.dto.request.AnswerJ
 import org.example.qint_backend.domain.question.presentation.dto.response.AnswerJudgmentResponse;
 import org.example.qint_backend.domain.user.domain.User;
 import org.example.qint_backend.domain.user.facade.UserFacade;
-import org.example.qint_backend.global.err.exception.ErrorCode;
 import org.springframework.stereotype.Service;
 
 @Service
