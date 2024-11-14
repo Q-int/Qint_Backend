@@ -7,7 +7,6 @@ import org.example.qint_backend.domain.question.domain.UserIncorrectAnswers;
 import org.example.qint_backend.domain.question.domain.repository.AnswerRepository;
 import org.example.qint_backend.domain.question.domain.repository.QuestionRepository;
 import org.example.qint_backend.domain.question.domain.repository.UserIncorrectAnswersRepository;
-import org.example.qint_backend.domain.question.presentation.dto.request.CategoryRequest;
 import org.example.qint_backend.domain.question.presentation.dto.response.OptionsElement;
 import org.example.qint_backend.domain.question.presentation.dto.response.QuestionByCategoryElement;
 import org.example.qint_backend.domain.question.presentation.dto.response.QuestionByCategoryResponse;
@@ -30,13 +29,12 @@ public class GetQuestionByCategoryService {
 
     private static final int MAX_QUESTIONS = 15;
 
-    public QuestionByCategoryResponse execute(CategoryRequest request) {
-        List<String> categories = request.getCategories();
+    public QuestionByCategoryResponse execute(List<Category> categories) {
         List<Question> allQuestions = new ArrayList<>();
         List<Question> examQuestions = new ArrayList<>();
 
-        for (String category : categories) {
-            Category categoryEnum = Category.valueOf(category);
+        for (Category category : categories) {
+            Category categoryEnum = Category.valueOf(String.valueOf(category));
 
             examQuestions.addAll(userIncorrectAnswersRepository.findAllByQuestionCategory(categoryEnum)
                     .stream()
