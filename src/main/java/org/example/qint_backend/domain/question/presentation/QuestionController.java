@@ -22,7 +22,7 @@ public class QuestionController {
     @GetMapping("/categories")
     public QuestionByCategoryResponse getQuestionsByCategory(
             @RequestParam List<Category> categories
-            ) {
+    ) {
         return getQuestionByCategoryService.execute(categories);
     }
 
