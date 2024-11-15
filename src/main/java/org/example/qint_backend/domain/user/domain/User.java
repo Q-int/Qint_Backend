@@ -31,4 +31,8 @@ public class User {
     public void updateIncorrectAnswersCounts(Long incorrectAnswers) {
         this.incorrectAnswers = incorrectAnswers;
     }
+
+    public void updateCorrectAnswersCounts(Long correctAnswers) {
+        this.correctAnswers = correctAnswers;
+    }
 }
