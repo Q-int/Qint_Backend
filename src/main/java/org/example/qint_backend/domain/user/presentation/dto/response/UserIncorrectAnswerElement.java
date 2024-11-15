@@ -11,8 +11,7 @@ public class UserIncorrectAnswerElement {
 
     private String commentary;
 
-    private String incorrect_Answer;
+    private String incorrectAnswer;
 
-    private String correct_Answer;
-
+    private String correctAnswer;
 }

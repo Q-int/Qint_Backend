@@ -30,8 +30,8 @@ public class GetIncorrectProblemsService {
                         UserIncorrectAnswerElement.builder()
                             .contents(userIncorrectAnswerElement.getQuestion().getContents())
                             .commentary(userIncorrectAnswerElement.getQuestion().getCommentary())
-                            .incorrect_Answer(userIncorrectAnswerElement.getAnswer().getText())
-                            .correct_Answer(answerFacade.getAllByQuestionAndIsCorrectIsTrue(userIncorrectAnswerElement.getQuestion()).getText())
+                            .incorrectAnswer(userIncorrectAnswerElement.getAnswer().getText())
+                            .correctAnswer(answerFacade.getAllByQuestionAndIsCorrectIsTrue(userIncorrectAnswerElement.getQuestion()).getText())
                             .build()
                 ).toList();
         return new UserIncorrectAnswerResponse(userIncorrectAnswerElementList);

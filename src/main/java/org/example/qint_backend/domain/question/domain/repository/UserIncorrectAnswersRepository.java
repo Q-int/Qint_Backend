@@ -12,5 +12,5 @@ import java.util.List;
 public interface UserIncorrectAnswersRepository extends JpaRepository<UserIncorrectAnswers, Long> {
     List<UserIncorrectAnswers> findAllByUser(User user);
     List<UserIncorrectAnswers> findAllByQuestionCategory(Category category);
-    Boolean existsByQuestion_Id(Long question_id);
+    Boolean existsByQuestionId(Long questionId);
 }

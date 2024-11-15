@@ -8,7 +8,7 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 public class QuestionByCategoryElement {
-    private Long question_id;
+    private Long questionId;
     private String contents;
     private List<OptionsElement> options;
 }
