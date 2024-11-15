@@ -19,26 +19,26 @@ public class EmailVerification {
     private String email;
 
     @Column(nullable = false)
-    private String auth_code;
+    private String authCode;
 
     @Column(nullable = false)
-    private Boolean is_verified = false;
+    private Boolean isVerified = false;
 
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
-    public EmailVerification(String email, String auth_code) {
+    public EmailVerification(String email, String authCode) {
         this.email = email;
-        this.auth_code = auth_code;
-        this.is_verified = false;
+        this.authCode = authCode;
+        this.isVerified = false;
         this.createdAt = LocalDateTime.now();
     }
 
     public void updateAuthCode(String authCode) {
-        this.auth_code = authCode;
+        this.authCode = authCode;
     }
 
     public void verify() {
-        this.is_verified = true;
+        this.isVerified = true;
     }
 }

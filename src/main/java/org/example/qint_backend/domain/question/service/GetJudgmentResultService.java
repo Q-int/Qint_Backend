@@ -26,8 +26,8 @@ public class GetJudgmentResultService {
     private final UserFacade userFacade;
 
     public AnswerJudgmentResponse execute(AnswerJudgmentRequest answerJudgmentRequest) {
-        Long questionId = answerJudgmentRequest.getQuestion_id();
-        Long answerId = answerJudgmentRequest.getAnswer_id();
+        Long questionId = answerJudgmentRequest.getQuestionId();
+        Long answerId = answerJudgmentRequest.getAnswerId();
 
         Question question = questionRepository.findById(questionId)
                 .orElseThrow(() -> InvalidQuestionIdException.EXCEPTION);
@@ -40,15 +40,15 @@ public class GetJudgmentResultService {
         boolean isCorrect = submittedAnswer.getId().equals(correctAnswer.getId());
 
         if (!isCorrect) {
-            if (!userIncorrectAnswersRepository.existsByQuestion_Id(questionId)) {
+            if (!userIncorrectAnswersRepository.existsByQuestionId(questionId)) {
                 saveUserIncorrectAnswer(question, submittedAnswer);
             }
         }
 
         return AnswerJudgmentResponse.builder()
-                .answer_text(correctAnswer.getText())
+                .answerText(correctAnswer.getText())
                 .commentary(question.getCommentary())
-                .is_correct(isCorrect)
+                .isCorrect(isCorrect)
                 .build();
     }
 

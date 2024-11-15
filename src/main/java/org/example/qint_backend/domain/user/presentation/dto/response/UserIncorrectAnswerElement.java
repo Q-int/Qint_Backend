@@ -1,5 +1,6 @@
 package org.example.qint_backend.domain.user.presentation.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -11,8 +12,9 @@ public class UserIncorrectAnswerElement {
 
     private String commentary;
 
-    private String incorrect_Answer;
+    @JsonProperty("incorrect_answer")
+    private String incorrectAnswer;
 
-    private String correct_Answer;
-
+    @JsonProperty("correct_answer")
+    private String correctAnswer;
 }
