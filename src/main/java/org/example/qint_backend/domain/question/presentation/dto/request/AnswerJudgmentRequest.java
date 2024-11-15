@@ -6,7 +6,9 @@ import lombok.Getter;
 @Getter
 public class AnswerJudgmentRequest {
 
+    @JsonProperty("question_id")
     private Long questionId;
 
+    @JsonProperty("answer_id")
     private Long answerId;
 }

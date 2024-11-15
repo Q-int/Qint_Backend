@@ -1,5 +1,6 @@
 package org.example.qint_backend.domain.question.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,6 +20,7 @@ public class Answer {
     private String text;
 
     @Column(name = "is_correct", nullable = false, updatable = false)
+    @JsonProperty("is_correct")
     private Boolean isCorrect;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -1,5 +1,6 @@
 package org.example.qint_backend.domain.question.presentation.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.example.qint_backend.domain.question.domain.Answer;
@@ -8,6 +9,7 @@ import org.example.qint_backend.domain.question.domain.Answer;
 @AllArgsConstructor
 public class OptionsElement {
 
+   @JsonProperty("answer_id")
    private Long answerId;
 
    private String text;

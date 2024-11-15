@@ -1,5 +1,6 @@
 package org.example.qint_backend.domain.user.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,8 +24,10 @@ public class User {
     private String password;
 
     @Column(name = "correctAnswers", nullable = false)
+    @JsonProperty("correct_answers")
     private Long correctAnswers;
 
     @Column(name = "incorrectAnswers", nullable = false)
+    @JsonProperty("incorrect_answers")
     private Long incorrectAnswers;
 }
