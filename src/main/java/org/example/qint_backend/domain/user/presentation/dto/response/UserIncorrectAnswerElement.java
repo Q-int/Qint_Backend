@@ -6,13 +6,11 @@ import lombok.Getter;
 @Getter
 @Builder
 public class UserIncorrectAnswerElement {
-
     private String contents;
 
     private String commentary;
 
-    private String incorrect_Answer;
+    private String incorrect_answer;
 
-    private String correct_Answer;
-
+    private String correct_answer;
 }
