@@ -13,6 +13,7 @@ import org.example.qint_backend.domain.question.facade.AnswerFacade;
 import org.example.qint_backend.domain.question.presentation.dto.request.AnswerJudgmentRequest;
 import org.example.qint_backend.domain.question.presentation.dto.response.AnswerJudgmentResponse;
 import org.example.qint_backend.domain.user.domain.User;
+import org.example.qint_backend.domain.user.domain.repository.UserRepository;
 import org.example.qint_backend.domain.user.facade.UserFacade;
 import org.springframework.stereotype.Service;
 
@@ -22,12 +23,28 @@ public class GetJudgmentResultService {
     private final QuestionRepository questionRepository;
     private final AnswerRepository answerRepository;
     private final UserIncorrectAnswersRepository userIncorrectAnswersRepository;
+    private final UserRepository userRepository;
     private final AnswerFacade answerFacade;
     private final UserFacade userFacade;
+
+    private static final int MAX_QUESTIONS = 15;
 
     public AnswerJudgmentResponse execute(AnswerJudgmentRequest answerJudgmentRequest) {
         Long questionId = answerJudgmentRequest.getQuestionId();
         Long answerId = answerJudgmentRequest.getAnswerId();
+
+        User user = userFacade.getCurrentUser();
+
+        long sumQuestions = user.getCorrectAnswers() + user.getIncorrectAnswers();
+
+        if(sumQuestions == MAX_QUESTIONS) {
+            userRepository.save(
+                    User.builder()
+                            .correctAnswers(0L)
+                            .incorrectAnswers(0L)
+                            .build()
+            );
+        }
 
         Question question = questionRepository.findById(questionId)
                 .orElseThrow(() -> InvalidQuestionIdException.EXCEPTION);
@@ -43,6 +60,10 @@ public class GetJudgmentResultService {
             if (!userIncorrectAnswersRepository.existsByQuestionId(questionId)) {
                 saveUserIncorrectAnswer(question, submittedAnswer);
             }
+            saveUserCorrectQuestions();
+        }
+        else {
+            saveUserIncorrectQuestions();
         }
 
         return AnswerJudgmentResponse.builder()
@@ -59,6 +80,26 @@ public class GetJudgmentResultService {
                         .user(user)
                         .question(question)
                         .answer(submittedAnswer)
+                        .build()
+        );
+    }
+
+    private void saveUserCorrectQuestions() {
+        User user = userFacade.getCurrentUser();
+        Long correctAnswers = user.getCorrectAnswers();
+        userRepository.save(
+                User.builder()
+                        .correctAnswers(correctAnswers++)
+                        .build()
+        );
+    }
+
+    private void saveUserIncorrectQuestions() {
+        User user = userFacade.getCurrentUser();
+        Long incorrectAnswers = user.getIncorrectAnswers();
+        userRepository.save(
+                User.builder()
+                        .incorrectAnswers(incorrectAnswers++)
                         .build()
         );
     }
