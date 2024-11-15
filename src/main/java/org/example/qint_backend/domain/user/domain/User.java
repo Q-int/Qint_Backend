@@ -27,4 +27,8 @@ public class User {
 
     @Column(name = "incorrectAnswers", nullable = false)
     private Long incorrectAnswers;
+
+    public void updateIncorrectAnswersCounts(Long incorrectAnswers) {
+        this.incorrectAnswers = incorrectAnswers;
+    }
 }
