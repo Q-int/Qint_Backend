@@ -60,10 +60,9 @@ public class GetJudgmentResultService {
             if (!userIncorrectAnswersRepository.existsByQuestionId(questionId)) {
                 saveUserIncorrectAnswer(question, submittedAnswer);
             }
-            saveUserCorrectQuestions();
-        }
-        else {
             saveUserIncorrectQuestions();
+        } else {
+            saveUserCorrectQuestions();
         }
 
         return AnswerJudgmentResponse.builder()
