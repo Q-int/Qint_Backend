@@ -8,5 +8,6 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 public class QuestionByCategoryResponse {
+
     List<QuestionByCategoryElement> questions;
 }

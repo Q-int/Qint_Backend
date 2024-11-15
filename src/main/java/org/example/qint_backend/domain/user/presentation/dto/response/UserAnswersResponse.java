@@ -10,5 +10,4 @@ public class UserAnswersResponse {
     private Long correct_answers;
 
     private Long incorrect_answers;
-
 }

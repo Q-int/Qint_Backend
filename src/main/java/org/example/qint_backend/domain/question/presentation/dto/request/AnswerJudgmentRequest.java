@@ -7,5 +7,6 @@ import lombok.Getter;
 public class AnswerJudgmentRequest {
 
     private Long question_id;
+
     private Long answer_id;
 }
