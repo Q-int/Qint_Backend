@@ -27,7 +27,7 @@ public class GetJudgmentResultService {
     private final AnswerFacade answerFacade;
     private final UserFacade userFacade;
 
-    private static final int MAX_QUESTIONS = 15;
+    private static final int MAX_QUESTIONS_COUNTS = 15;
 
     public AnswerJudgmentResponse execute(AnswerJudgmentRequest answerJudgmentRequest) {
         Long questionId = answerJudgmentRequest.getQuestionId();
@@ -37,13 +37,9 @@ public class GetJudgmentResultService {
 
         long sumQuestions = user.getCorrectAnswers() + user.getIncorrectAnswers();
 
-        if(sumQuestions == MAX_QUESTIONS) {
-            userRepository.save(
-                    User.builder()
-                            .correctAnswers(0L)
-                            .incorrectAnswers(0L)
-                            .build()
-            );
+        if(sumQuestions == MAX_QUESTIONS_COUNTS) {
+            user.resetAnswersCounts(user.getCorrectAnswers(), user.getIncorrectAnswers());
+            userRepository.save(user);
         }
 
         Question question = questionRepository.findById(questionId)
@@ -85,21 +81,15 @@ public class GetJudgmentResultService {
 
     private void saveUserCorrectQuestions() {
         User user = userFacade.getCurrentUser();
-        Long correctAnswers = user.getCorrectAnswers();
-        userRepository.save(
-                User.builder()
-                        .correctAnswers(correctAnswers++)
-                        .build()
-        );
+        Long correctAnswers = user.getCorrectAnswers() + 1;
+        user.updateCorrectAnswersCounts(correctAnswers);
+        userRepository.save(user);
     }
 
     private void saveUserIncorrectQuestions() {
         User user = userFacade.getCurrentUser();
-        Long incorrectAnswers = user.getIncorrectAnswers();
-        userRepository.save(
-                User.builder()
-                        .incorrectAnswers(incorrectAnswers++)
-                        .build()
-        );
+        Long incorrectAnswers = user.getIncorrectAnswers() + 1;
+        user.updateIncorrectAnswersCounts(incorrectAnswers);
+        userRepository.save(user);
     }
 }
