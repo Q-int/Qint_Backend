@@ -1,5 +1,6 @@
 package org.example.qint_backend.domain.email.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,12 +20,15 @@ public class EmailVerification {
     private String email;
 
     @Column(nullable = false)
+    @JsonProperty("auth_code")
     private String authCode;
 
     @Column(nullable = false)
+    @JsonProperty("is_verified")
     private Boolean isVerified = false;
 
     @Column(nullable = false)
+    @JsonProperty("created_at")
     private LocalDateTime createdAt;
 
     public EmailVerification(String email, String authCode) {
