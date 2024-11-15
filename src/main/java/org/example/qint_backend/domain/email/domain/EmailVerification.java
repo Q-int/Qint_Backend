@@ -41,8 +41,4 @@ public class EmailVerification {
     public void verify() {
         this.isVerified = true;
     }
-
-    public boolean get_is_verified() {
-        return false;
-    }
 }
