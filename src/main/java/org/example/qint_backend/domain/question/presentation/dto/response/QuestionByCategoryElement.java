@@ -9,7 +9,7 @@ import java.util.List;
 @AllArgsConstructor
 public class QuestionByCategoryElement {
 
-    private Long question_id;
+    private Long questionId;
 
     private String contents;
 

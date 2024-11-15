@@ -26,8 +26,8 @@ public class GetJudgmentResultService {
     private final UserFacade userFacade;
 
     public AnswerJudgmentResponse execute(AnswerJudgmentRequest answerJudgmentRequest) {
-        Long questionId = answerJudgmentRequest.getQuestion_id();
-        Long answerId = answerJudgmentRequest.getAnswer_id();
+        Long questionId = answerJudgmentRequest.getQuestionId();
+        Long answerId = answerJudgmentRequest.getAnswerId();
 
         Question question = questionRepository.findById(questionId)
                 .orElseThrow(() -> InvalidQuestionIdException.EXCEPTION);
@@ -44,9 +44,9 @@ public class GetJudgmentResultService {
         }
 
         return AnswerJudgmentResponse.builder()
-                .answer_text(question.getContents())
+                .answerText(question.getContents())
                 .commentary(question.getCommentary())
-                .is_correct(isCorrect)
+                .isCorrect(isCorrect)
                 .build();
     }
 
