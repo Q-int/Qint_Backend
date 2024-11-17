@@ -16,8 +16,9 @@ public class MoveToHomeService {
     @Transactional
     public void execute(MoveToHomeRequest request) {
         User user = userFacade.getCurrentUser();
+        boolean isMoveToHome = request.isMoveToHome();
 
-        if(request.isMoveToHome()) {
+        if(isMoveToHome) {
             user.resetAnswersCounts(
                     user.getCorrectAnswers(),
                     user.getIncorrectAnswers()
