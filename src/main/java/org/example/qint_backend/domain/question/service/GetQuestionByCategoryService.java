@@ -39,6 +39,7 @@ public class GetQuestionByCategoryService {
 
         User user = userFacade.getCurrentUser();
         user.resetAnswersCounts();
+        deleteAllIncorrectQuestions();
 
         for (Category category : categories) {
             Category categoryEnum = Category.valueOf(String.valueOf(category));
@@ -74,5 +75,10 @@ public class GetQuestionByCategoryService {
                 .toList();
 
         return new QuestionByCategoryResponse(questionByCategoryElements);
+    }
+
+    public void deleteAllIncorrectQuestions() {
+        User user = userFacade.getCurrentUser();
+        userIncorrectAnswersRepository.deleteAllByUser(user);
     }
 }
