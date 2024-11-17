@@ -36,4 +36,11 @@ public class MoveToNextProblemService {
             }
         }
     }
+
+    private void saveUserIncorrectAnswer() {
+        User user = userFacade.getCurrentUser();
+        Long incorrectAnswers = user.getIncorrectAnswers();
+        user.updateIncorrectAnswersCounts(incorrectAnswers + 1);
+        userRepository.save(user);
+    }
 }
