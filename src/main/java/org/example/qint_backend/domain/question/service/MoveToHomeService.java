@@ -18,7 +18,7 @@ public class MoveToHomeService {
         User user = userFacade.getCurrentUser();
         boolean isMoveToHome = request.isMoveToHome();
 
-        if(isMoveToHome) {
+        if(!isMoveToHome) {
             user.resetAnswersCounts(
                     user.getCorrectAnswers(),
                     user.getIncorrectAnswers()
