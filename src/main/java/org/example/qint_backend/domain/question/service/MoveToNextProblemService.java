@@ -17,12 +17,10 @@ public class MoveToNextProblemService {
     public void execute(MoveToNextProblemRequest request) {
         User user = userFacade.getCurrentUser();
         boolean moveToNextProblem = request.isMoveToNextProblem();
+        Long incorrectAnswers = user.getIncorrectAnswers() + 1;
 
         if(!moveToNextProblem) {
-            user.resetAnswersCounts(
-                    user.getCorrectAnswers(),
-                    user.getIncorrectAnswers()
-            );
+            user.updateIncorrectAnswersCounts(incorrectAnswers);
         }
     }
 }
