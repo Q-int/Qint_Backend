@@ -5,6 +5,6 @@ import lombok.Getter;
 
 @Getter
 public class MoveToNextProblemRequest {
-    @JsonProperty("move_to_Next_Problem")
+    @JsonProperty("move_to_next_problem")
     private boolean moveToNextProblem;
 }

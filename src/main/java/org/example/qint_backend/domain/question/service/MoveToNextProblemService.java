@@ -3,24 +3,37 @@ package org.example.qint_backend.domain.question.service;
 import lombok.RequiredArgsConstructor;
 import org.example.qint_backend.domain.question.presentation.dto.request.MoveToNextProblemRequest;
 import org.example.qint_backend.domain.user.domain.User;
+import org.example.qint_backend.domain.user.domain.repository.UserRepository;
 import org.example.qint_backend.domain.user.facade.UserFacade;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
 public class MoveToNextProblemService {
 
     private final UserFacade userFacade;
+    private final UserRepository userRepository;
 
-    @Transactional
+    private static final int MAX_QUESTIONS_COUNTS = 15;
+
     public void execute(MoveToNextProblemRequest request) {
         User user = userFacade.getCurrentUser();
-        boolean moveToNextProblem = request.isMoveToNextProblem();
-        Long incorrectAnswers = user.getIncorrectAnswers() + 1;
 
-        if(!moveToNextProblem) {
-            user.updateIncorrectAnswersCounts(incorrectAnswers);
+        Long correctAnswers = user.getCorrectAnswers();
+        Long incorrectAnswers = user.getIncorrectAnswers();
+
+        long sumAnswers = correctAnswers + incorrectAnswers;
+
+        boolean moveToNextProblem = request.isMoveToNextProblem();
+
+        if (sumAnswers >= MAX_QUESTIONS_COUNTS) {
+            user.resetAnswersCounts(user.getCorrectAnswers(), user.getIncorrectAnswers());
+            userRepository.save(user);
+
+            if (!moveToNextProblem) {
+                user.updateIncorrectAnswersCounts(incorrectAnswers + 1);
+                userRepository.save(user);
+            }
         }
     }
 }
