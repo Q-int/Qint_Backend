@@ -41,7 +41,6 @@ public class GetJudgmentResultService {
 
         boolean isCorrect = submittedAnswer.getId().equals(correctAnswer.getId());
 
-
         if (!isCorrect) {
             if (!userIncorrectAnswersRepository.existsByQuestionId(questionId)) {
                 saveUserIncorrectAnswer(question, submittedAnswer);
