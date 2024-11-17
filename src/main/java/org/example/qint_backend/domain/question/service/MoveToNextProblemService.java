@@ -28,14 +28,12 @@ public class MoveToNextProblemService {
 
         boolean moveToNextProblem = request.isMoveToNextProblem();
 
-        if (sumAnswers >= MAX_ANSWER_COUNTS) {
-            user.resetAnswersCounts(user.getCorrectAnswers(), user.getIncorrectAnswers());
-            userRepository.save(user);
+        if (sumAnswers == MAX_ANSWER_COUNTS) {
+            user.resetAnswersCounts(correctAnswers, incorrectAnswers);
+        }
 
-            if (!moveToNextProblem) {
-                user.updateIncorrectAnswersCounts(incorrectAnswers + 1);
-                userRepository.save(user);
-            }
+        if (!moveToNextProblem) {
+            saveUserIncorrectAnswer();
         }
     }
 
