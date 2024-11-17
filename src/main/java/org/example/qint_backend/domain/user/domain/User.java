@@ -36,7 +36,7 @@ public class User {
         this.correctAnswers = correctAnswers;
     }
 
-    public void resetAnswersCounts(Long correctAnswers, Long incorrectAnswers) {
+    public void resetAnswersCounts() {
         this.correctAnswers = 0L;
         this.incorrectAnswers = 0L;
     }

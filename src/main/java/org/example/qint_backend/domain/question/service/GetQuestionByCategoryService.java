@@ -10,6 +10,8 @@ import org.example.qint_backend.domain.question.domain.repository.UserIncorrectA
 import org.example.qint_backend.domain.question.presentation.dto.response.OptionsElement;
 import org.example.qint_backend.domain.question.presentation.dto.response.QuestionByCategoryElement;
 import org.example.qint_backend.domain.question.presentation.dto.response.QuestionByCategoryResponse;
+import org.example.qint_backend.domain.user.domain.User;
+import org.example.qint_backend.domain.user.facade.UserFacade;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,12 +28,17 @@ public class GetQuestionByCategoryService {
     private final UserIncorrectAnswersRepository userIncorrectAnswersRepository;
     private final QuestionRepository questionRepository;
     private final AnswerRepository answerRepository;
+    private final UserFacade userFacade;
 
     private static final int MAX_QUESTIONS = 15;
 
+    @Transactional
     public QuestionByCategoryResponse execute(List<Category> categories) {
         List<Question> allQuestions = new ArrayList<>();
         List<Question> examQuestions = new ArrayList<>();
+
+        User user = userFacade.getCurrentUser();
+        user.resetAnswersCounts();
 
         for (Category category : categories) {
             Category categoryEnum = Category.valueOf(String.valueOf(category));
