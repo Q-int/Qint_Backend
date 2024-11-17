@@ -27,13 +27,6 @@ public class MoveToNextProblemService {
 
         long sumAnswers = correctAnswers + incorrectAnswers;
 
-        if (sumAnswers == MAX_QUESTIONS_COUNTS) {
-            user.resetAnswersCounts(correctAnswers, incorrectAnswers);
-        }
-
-        if (!moveToNextProblem) {
-            saveUserIncorrectAnswer();
-        }
     }
 
     private void saveUserIncorrectAnswer() {
