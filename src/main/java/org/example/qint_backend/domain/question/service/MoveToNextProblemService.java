@@ -15,7 +15,7 @@ public class MoveToNextProblemService {
     private final UserFacade userFacade;
     private final UserRepository userRepository;
 
-    private static final int MAX_ANSWER_COUNTS = 15;
+    private static final int MAX_QUESTIONS_COUNTS = 15;
 
     @Transactional
     public void execute(MoveToNextProblemRequest request) {
@@ -28,12 +28,14 @@ public class MoveToNextProblemService {
 
         boolean moveToNextProblem = request.isMoveToNextProblem();
 
-        if (sumAnswers == MAX_ANSWER_COUNTS) {
-            user.resetAnswersCounts(correctAnswers, incorrectAnswers);
-        }
+        if (sumAnswers >= MAX_QUESTIONS_COUNTS) {
+            user.resetAnswersCounts(user.getCorrectAnswers(), user.getIncorrectAnswers());
+            userRepository.save(user);
 
-        if (!moveToNextProblem) {
-            saveUserIncorrectAnswer();
+            if (!moveToNextProblem) {
+                user.updateIncorrectAnswersCounts(incorrectAnswers + 1);
+                userRepository.save(user);
+            }
         }
     }
 
