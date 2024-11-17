@@ -27,10 +27,7 @@ public class GetJudgmentResultService {
     private final AnswerFacade answerFacade;
     private final UserFacade userFacade;
 
-    private static final int MAX_QUESTIONS_COUNTS = 15;
-
     public AnswerJudgmentResponse execute(AnswerJudgmentRequest answerJudgmentRequest) {
-        User user = userFacade.getCurrentUser();
         Long questionId = answerJudgmentRequest.getQuestionId();
         Long answerId = answerJudgmentRequest.getAnswerId();
 
@@ -44,12 +41,6 @@ public class GetJudgmentResultService {
 
         boolean isCorrect = submittedAnswer.getId().equals(correctAnswer.getId());
 
-        long sumQuestions = user.getCorrectAnswers() + user.getIncorrectAnswers();
-
-        if(sumQuestions == MAX_QUESTIONS_COUNTS) {
-            user.resetAnswersCounts(user.getCorrectAnswers(), user.getIncorrectAnswers());
-            userRepository.save(user);
-        }
 
         if (!isCorrect) {
             if (!userIncorrectAnswersRepository.existsByQuestionId(questionId)) {
