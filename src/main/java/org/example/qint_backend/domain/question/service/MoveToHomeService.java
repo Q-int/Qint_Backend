@@ -21,7 +21,6 @@ public class MoveToHomeService {
         Long correctAnswers = user.getCorrectAnswers();
         Long incorrectAnswers = user.getIncorrectAnswers();
 
-        user.resetAnswersCounts(correctAnswers, incorrectAnswers);
 
         return MoveToHomeResponse.builder()
                 .correctAnswers(correctAnswers)
