@@ -13,6 +13,10 @@ spring:
       jdbc:
         batch_size: 200
       open-in-view: false
+    properties:
+      hibernate:
+        hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
   redis:
     host: ${REDIS_HOST:localhost}
     port: ${REDIS_PORT:6379}
