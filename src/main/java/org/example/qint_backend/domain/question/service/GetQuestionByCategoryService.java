@@ -58,6 +58,8 @@ public class GetQuestionByCategoryService {
             }
         }
 
+        Collections.shuffle(examQuestions);
+
         examQuestions = examQuestions.stream()
                 .limit(MAX_QUESTIONS)
                 .collect(Collectors.toList());
